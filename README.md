@@ -8,7 +8,10 @@ This is an R package that allows you to generate colors from color palettes defi
 Installation
 ------------
 
+Requires [V8](https://cran.r-project.org/web/packages/V8/index.html)
+
 ``` r
+if(!require("V8")) install.packages("V8")
 if(!require("devtools")) install.packages("devtools")
 devtools::install_github("bhaskarvk/colormap")
 ```
