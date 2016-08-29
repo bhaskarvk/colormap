@@ -1,0 +1,80 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "README-"
+)
+```
+
+# Color Palettes from Node's Colormap module.
+
+This is an R package that allows you to generate colors from color palettes defined in Node [colormap](https://github.com/bpostlethwaite/colormap) module.
+
+## Installation
+
+Requires [V8](https://cran.r-project.org/web/packages/V8/index.html)
+
+```{r install, eval=FALSE}
+if(!require("V8")) install.packages("V8")
+if(!require("devtools")) install.packages("devtools")
+devtools::install_github("bhaskarvk/colormap")
+```
+
+## Usage
+
+There is only one function `colormap` which takes 4 optional arguments
+
+- colormap: A string representing one of the 44 built-in colormaps.\n You can use the `colormaps` list to specify a value. e.g. `colormaps$density`
+- nshades: Number of colors to generate. NOTE each palette has a certain mininum required number and if you specify a value below it, the function will throw an error.
+- format: one of 'hex', 'rgb', 'rgbaString'
+- alpha: Either a single value between 0 and 1 or a vector of 2 elements specifying a range.
+
+## Example
+
+```{r eg1}
+library(colormap)
+
+colormap() # Defaults to 72 colors from the 'jet' palette.
+
+colormap(colormap=colormaps$temperature, nshades=20) # Diff Palette
+
+colormap(format='rgb',nshades=10) # As rgb
+
+colormap(format='rgb',nshades=10,alpha=0.5) # Constant alpha
+
+colormap(format='rgb',nshades=10,alpha=c(0.2,08)) # Alpha Range
+
+colormap(format='rgbaString',nshades=10) # As rgba string
+```
+
+Finally all palettes
+
+```{r plot, fig.height=18}
+par(mfrow=c(44,1))
+par(mar=rep(0.25,4))
+purrr::walk(colormaps, function(x) { 
+  barplot(rep(1,72), yaxt="n", space=c(0,0),border=NA,
+          col=colormap(colormap=x), main = sprintf("\n\n%s",x))
+  })
+```
+
+## WARNING
+
+I have noticed that certain palettes don't generate unique colors. From my observation certain palettes can have up to one or two dupes. I have raised a [BUG](https://github.com/bpostlethwaite/colormap/issues/9) upstream, and will fix this package when that gets fixed. In the mean time you can use `unique`.
+
+```{r dupes}
+# This has no dupes
+greys <- colormap(colormap = colormaps$greys)
+length(greys)
+length(unique(greys))
+
+# This has dupes
+thermal <- colormap(colormap = colormaps$temperature)
+length(thermal)
+length(unique(thermal))

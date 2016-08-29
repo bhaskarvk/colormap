@@ -1,0 +1,13 @@
+Package: colormap
+Type: Package
+Title: Color palettes using colormaps Node module.
+Version: 0.1.0
+Authors@R: person("Bhaskar", "Karambelkar", email = "bhaskarvk@gmail.com",
+    role = c("aut", "cre"))
+Description: See README for details.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Imports:
+    V8
+RoxygenNote: 5.0.1
