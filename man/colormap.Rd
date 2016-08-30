@@ -4,31 +4,30 @@
 \name{colormap}
 \alias{colormap}
 \alias{colormap-package}
-\title{A package to generate colors from a list of 44 pre-defined palettes.}
+\title{A package to generate colors from a list of 44 pre-defined palettes}
 \usage{
 colormap(colormap = colormaps$jet, nshades = 72, format = "hex",
-  alpha = 1)
+  alpha = 1, reverse = FALSE)
 }
 \arguments{
 \item{colormap}{A string.
 You can use the colormaps list for a list of pre-defined palettes}
 
 \item{nshades}{A number.
-Number of colors to generate.
-Certain palettes require a minimum number and the function will
-throw an error if this value is less than that.}
+Number of colors to generate.}
 
-\item{format.}{A string.
+\item{format}{A string.
 Should be 'hex', 'rgb', or 'rgbaString'}
 
-\item{alpha.}{A Number of Vector
-A single float between 0 and 1, or a vector with two elements, each between 0 and 1.}
+\item{alpha}{A Number between 0 and 1}
+
+\item{reverse}{Boolean. Whether to reverse the order.}
 }
 \value{
 Colors either in vector, matrix, list format depending on format.
 }
 \description{
-A package to generate colors from a list of 44 pre-defined palettes.
+A package to generate colors from a list of 44 pre-defined palettes
 
 Generate colors from a list of 44 palettes
 }
@@ -37,7 +36,6 @@ colormap() # Defaults to 72 colors from the 'jet' palette.
 colormap(colormap=colormaps$temperature, nshades=20) # Diff Palette
 colormap(format='rgb',nshades=10) # As rgb
 colormap(format='rgb',nshades=10,alpha=0.5) # Constant alpha
-colormap(format='rgb',nshades=10,alpha=c(0.2,08)) # Alpha Range
 colormap(format='rgbaString',nshades=10) # As rgba string
 }
 \author{

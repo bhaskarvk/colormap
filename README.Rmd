@@ -12,9 +12,22 @@ knitr::opts_chunk$set(
 )
 ```
 
-# Color Palettes from Node's Colormap module.
+# Color Palettes from Node.js Colormap module.
 
-This is an R package that allows you to generate colors from color palettes defined in Node [colormap](https://github.com/bpostlethwaite/colormap) module.
+This is an R package that allows you to generate colors from color palettes defined in Node [colormap](https://github.com/bpostlethwaite/colormap) module. In addition it provides scales functions for use in ggplot2 plots. In total it provides 44 distinct palettes made from sequential and/or diverging colors.
+
+## Credits
+
+- The [colormap](https://github.com/bpostlethwaite/colormap) Node.js module which does all the heavylifting.
+- The [V8](https://github.com/jeroenooms/V8) package which allows R code to call Javascript code.
+- [Bob Rudis](https://twitter.com/hrbrmstr)'s [zoneparser](https://github.com/hrbrmstr/zoneparser) package which I used as a skeleton for this pacakge.
+- [Simon Garnier](https://twitter.com/sjmgarnier)'s [viridis](https://github.com/sjmgarnier/viridis) package for ggplot2 scale functions.
+
+## Updates
+
+- 2016-08-30 Input Validation and ggplot2 scales.
+- 2016-08-29 First Release.
+
 
 ## Installation
 
@@ -28,12 +41,13 @@ devtools::install_github("bhaskarvk/colormap")
 
 ## Usage
 
-There is only one function `colormap` which takes 4 optional arguments
+The main function is `colormap` which takes 5 optional arguments
 
 - colormap: A string representing one of the 44 built-in colormaps.\n You can use the `colormaps` list to specify a value. e.g. `colormaps$density`
-- nshades: Number of colors to generate. NOTE each palette has a certain mininum required number and if you specify a value below it, the function will throw an error.
+- nshades: Number of colors to generate.
 - format: one of 'hex', 'rgb', 'rgbaString'
-- alpha: Either a single value between 0 and 1 or a vector of 2 elements specifying a range.
+- alpha: Between 0 & 1 to specify the transparency.
+- reverse: Boolean. Whether to reverse the order of the colors returned or not.
 
 ## Example
 
@@ -48,12 +62,81 @@ colormap(format='rgb',nshades=10) # As rgb
 
 colormap(format='rgb',nshades=10,alpha=0.5) # Constant alpha
 
-colormap(format='rgb',nshades=10,alpha=c(0.2,08)) # Alpha Range
-
 colormap(format='rgbaString',nshades=10) # As rgba string
 ```
 
-Finally all palettes
+You also get `scale_fill_colormap` and `scale_color_colormap` functions for using these palettes in ggplot2 plots. Check `?colormap::scale_fill_colormap` for details.
+
+
+```{r ggplot2}
+library(ggplot2)
+
+# Continuous color scale
+ggplot(mtcars,aes(x=wt,y=mpg)) + geom_point(aes(color=hp)) +
+  theme_minimal() +
+  scale_color_colormap('Horse Power',
+                       discrete = F,colormap = colormaps$viridis, reverse = T)
+
+ggplot(mtcars,aes(x=wt,y=mpg)) + geom_point(aes(color=as.factor(cyl))) +
+  theme_minimal() +
+  scale_color_colormap('Cylinder',
+                       discrete = T,colormap = colormaps$warm, reverse = T)
+
+```
+
+Here are two choroplethes using `scale_fill_colormap`.
+
+```{r maps}
+library(maptools)
+library(scales)
+library(ggplot2)
+library(ggalt)
+library(albersusa)
+library(ggthemes)
+library(colormap)
+
+us <- usa_composite()
+us_map <- fortify(us, region="name")
+
+gg_usa <- ggplot()
+gg_usa <- gg_usa + geom_map(data=us_map, map=us_map,
+                    aes(x=long, y=lat, map_id=id),
+                    color="#2b2b2b", size=0.1, fill=NA)
+gg_usa <- gg_usa + theme_map()
+gg_usa <- gg_usa + 
+  geom_map(data=us@data, map=us_map,
+           aes(fill=pop_2014, map_id=name),
+           color="white", size=0.1) +
+  coord_proj(us_laea_proj) +
+  theme(legend.position="right")
+
+gg_usa +
+  scale_fill_colormap("State Population\n(2014 Estimates)", labels=comma,
+                      colormap = colormaps$copper, reverse = T, discrete = F)
+
+
+counties <- counties_composite()
+
+counties_map <- fortify(counties, region="fips")
+
+gg_counties <- ggplot()
+gg_counties <- gg_counties + geom_map(data=counties_map, map=counties_map,
+                    aes(x=long, y=lat, map_id=id),
+                    color="#2b2b2b", size=0.1, fill=NA)
+gg_counties <- gg_counties + theme_map() +
+  coord_proj(us_laea_proj) +
+  theme(legend.position="right")
+gg_counties <- gg_counties + 
+  geom_map(data=counties@data, map=counties_map,
+           aes(fill=population/census_area, map_id=fips),
+           color="white", size=0.1)
+gg_counties +
+  scale_fill_colormap("County Population Density", labels=comma, trans = 'log10',
+                      colormap = colormaps$oxygen, reverse = T, discrete = F)
+
+```
+
+Here is a plot showing all possible palettes.
 
 ```{r plot, fig.height=18}
 par(mfrow=c(44,1))
@@ -63,18 +146,3 @@ purrr::walk(colormaps, function(x) {
           col=colormap(colormap=x), main = sprintf("\n\n%s",x))
   })
 ```
-
-## WARNING
-
-I have noticed that certain palettes don't generate unique colors. From my observation certain palettes can have up to one or two dupes. I have raised a [BUG](https://github.com/bpostlethwaite/colormap/issues/9) upstream, and will fix this package when that gets fixed. In the mean time you can use `unique`.
-
-```{r dupes}
-# This has no dupes
-greys <- colormap(colormap = colormaps$greys)
-length(greys)
-length(unique(greys))
-
-# This has dupes
-thermal <- colormap(colormap = colormaps$temperature)
-length(thermal)
-length(unique(thermal))
