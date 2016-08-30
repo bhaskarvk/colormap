@@ -182,7 +182,7 @@ gg_counties <- gg_counties +
            color="white", size=0.1)
 gg_counties +
   scale_fill_colormap("County Population Density", labels=comma, trans = 'log10',
-                      colormap = colormaps$oxygen, reverse = T, discrete = F)
+                      colormap = colormaps$cubehelix, reverse = T, discrete = F)
 ```
 
 ![](README-maps-2.png)
