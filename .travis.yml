@@ -1,5 +1,19 @@
 # R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
 
 language: R
-sudo: false
 cache: packages
+sudo: false
+addons:
+  apt:
+    packages:
+      - libproj-dev
+      - libv8-dev
+r_binary_packages:
+  - devtools
+  - stringr
+  - v8
+  - scales
+  - ggplot2
+  - testthat
+  - ggthemes
+  - maptools
