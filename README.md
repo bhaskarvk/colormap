@@ -16,6 +16,8 @@ Credits
 Updates
 -------
 
+[![Travis-CI Build Status](https://travis-ci.org/bhaskarvk/colormap.svg?branch=master)](https://travis-ci.org/bhaskarvk/colormap)
+
 -   2016-08-30 Input Validation and ggplot2 scales.
 -   2016-08-29 First Release.
 
