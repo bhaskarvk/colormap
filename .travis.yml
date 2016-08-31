@@ -11,7 +11,7 @@ addons:
 r_binary_packages:
   - devtools
   - stringr
-  - v8
+  - V8
   - scales
   - ggplot2
   - testthat
