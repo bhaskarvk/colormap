@@ -112,7 +112,7 @@ colormap <- function(colormap=colormaps$jet, nshades=72,
   # But having this allows one to directly call colormaps::colormap()
   # w/o having to attach the package.
   if(!exists("ct", globalenv())) {
-    ct <<- V8::new_context()
+    ct <<- V8::v8()
     ct$source(system.file("js/colormap.js", package="colormap"))
   }
 
@@ -147,7 +147,7 @@ colormap <- function(colormap=colormaps$jet, nshades=72,
 }
 
 .onAttach <- function(libname, pkgname) {
-  ct <<- V8::new_context()
+  ct <<- V8::v8()
   ct$source(system.file("js/colormap.js", package="colormap"))
 
 }

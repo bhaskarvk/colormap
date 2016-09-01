@@ -17,3 +17,5 @@ r_binary_packages:
   - testthat
   - ggthemes
   - maptools
+r_github_packages:
+  - hrbrmstr/ggalt
