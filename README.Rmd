@@ -25,7 +25,7 @@ This is an R package that allows you to generate colors from color palettes defi
 
 ## Updates
 
-[![Travis-CI Build Status](https://travis-ci.org/bhaskarvk/colormap.svg?branch=master)](https://travis-ci.org/bhaskarvk/colormap)
+[![Travis-CI Build Status](https://travis-ci.org/bhaskarvk/colormap.svg?branch=master)](https://travis-ci.org/bhaskarvk/colormap) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/bhaskarvk/colormap?branch=master&svg=true)](https://ci.appveyor.com/project/bhaskarvk/colormap)
 
 - 2016-08-30 Input Validation and ggplot2 scales.
 - 2016-08-29 First Release.
@@ -126,15 +126,16 @@ gg_counties <- gg_counties + geom_map(data=counties_map, map=counties_map,
                     aes(x=long, y=lat, map_id=id),
                     color="#2b2b2b", size=0.1, fill=NA)
 gg_counties <- gg_counties + theme_map() +
-  coord_proj(us_laea_proj) +
-  theme(legend.position="right")
+  coord_proj(us_laea_proj, xlim = c(-122, -74.5 )) 
 gg_counties <- gg_counties + 
   geom_map(data=counties@data, map=counties_map,
            aes(fill=population/census_area, map_id=fips),
            color="white", size=0.1)
 gg_counties +
   scale_fill_colormap("County Population Density", labels=comma, trans = 'log10',
-                      colormap = colormaps$cubehelix, reverse = T, discrete = F)
+                      colormap = colormaps$picnic, reverse = F, discrete = F) +
+  theme(#panel.border = element_rect(colour = "black", fill=NA, size=1),
+        legend.position = 'bottom', legend.direction = "horizontal")
 
 ```
 
