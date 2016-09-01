@@ -1,55 +1,52 @@
----
-output: github_document
----
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-
-
-
-# Color Palettes from Node.js Colormap module.
+Color Palettes from Node.js Colormap module.
+============================================
 
 This is an R package that allows you to generate colors from color palettes defined in Node [colormap](https://github.com/bpostlethwaite/colormap) module. In addition it provides scales functions for use in ggplot2 plots. In total it provides 44 distinct palettes made from sequential and/or diverging colors.
 
-## Credits
+Credits
+-------
 
-- The [colormap](https://github.com/bpostlethwaite/colormap) Node.js module which does all the heavylifting.
-- The [V8](https://github.com/jeroenooms/V8) package which allows R code to call Javascript code.
-- [Bob Rudis](https://twitter.com/hrbrmstr)'s [zoneparser](https://github.com/hrbrmstr/zoneparser) package which I used as a skeleton for this pacakge.
-- [Simon Garnier](https://twitter.com/sjmgarnier)'s [viridis](https://github.com/sjmgarnier/viridis) package for ggplot2 scale functions.
+-   The [colormap](https://github.com/bpostlethwaite/colormap) Node.js module which does all the heavylifting.
+-   The [V8](https://github.com/jeroenooms/V8) package which allows R code to call Javascript code.
+-   [Bob Rudis](https://twitter.com/hrbrmstr)'s [zoneparser](https://github.com/hrbrmstr/zoneparser) package which I used as a skeleton for this pacakge.
+-   [Simon Garnier](https://twitter.com/sjmgarnier)'s [viridis](https://github.com/sjmgarnier/viridis) package for ggplot2 scale functions.
 
-## Updates
+Updates
+-------
 
 [![Travis-CI Build Status](https://travis-ci.org/bhaskarvk/colormap.svg?branch=master)](https://travis-ci.org/bhaskarvk/colormap) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/bhaskarvk/colormap?branch=master&svg=true)](https://ci.appveyor.com/project/bhaskarvk/colormap)
 
-- 2016-08-30 Input Validation and ggplot2 scales.
-- 2016-08-29 First Release.
+-   2016-08-30 Input Validation and ggplot2 scales.
+-   2016-08-29 First Release.
 
-
-## Installation
+Installation
+------------
 
 Requires [V8](https://cran.r-project.org/web/packages/V8/index.html)
 
-
-```r
+``` r
 if(!require("V8")) install.packages("V8")
 if(!require("devtools")) install.packages("devtools")
 devtools::install_github("bhaskarvk/colormap")
 ```
 
-## Usage
+Usage
+-----
 
 The main function is `colormap` which takes 5 optional arguments
 
-- colormap: A string representing one of the 44 built-in colormaps.\n You can use the `colormaps` list to specify a value. e.g. `colormaps$density`
-- nshades: Number of colors to generate.
-- format: one of 'hex', 'rgb', 'rgbaString'
-- alpha: Between 0 & 1 to specify the transparency.
-- reverse: Boolean. Whether to reverse the order of the colors returned or not.
+-   colormap: A string representing one of the 44 built-in colormaps.You can use the `colormaps` list to specify a value. e.g. `colormaps$density`
+-   nshades: Number of colors to generate.
+-   format: one of 'hex', 'rgb', 'rgbaString'
+-   alpha: Between 0 & 1 to specify the transparency.
+-   reverse: Boolean. Whether to reverse the order of the colors returned or not.
 
-## Example
+Example
+-------
 
-
-```r
+``` r
 library(colormap)
 
 colormap() # Defaults to 72 colors from the 'jet' palette.
@@ -110,9 +107,7 @@ colormap(format='rgbaString',nshades=10) # As rgba string
 
 You also get `scale_fill_colormap` and `scale_color_colormap` functions for using these palettes in ggplot2 plots. Check `?colormap::scale_fill_colormap` for details.
 
-
-
-```r
+``` r
 library(ggplot2)
 
 # Continuous color scale
@@ -122,9 +117,9 @@ ggplot(mtcars,aes(x=wt,y=mpg)) + geom_point(aes(color=hp)) +
                        discrete = F,colormap = colormaps$viridis, reverse = T)
 ```
 
-![plot of chunk ggplot2](README-ggplot2-1.png)
+![](README-ggplot2-1.png)
 
-```r
+``` r
 
 ggplot(mtcars,aes(x=wt,y=mpg)) + geom_point(aes(color=as.factor(cyl))) +
   theme_minimal() +
@@ -132,19 +127,17 @@ ggplot(mtcars,aes(x=wt,y=mpg)) + geom_point(aes(color=as.factor(cyl))) +
                        discrete = T,colormap = colormaps$warm, reverse = T)
 ```
 
-![plot of chunk ggplot2](README-ggplot2-2.png)
+![](README-ggplot2-2.png)
 
 Here are two choroplethes using `scale_fill_colormap`.
 
-
-```r
+``` r
 library(maptools)
 #> Loading required package: sp
 #> Checking rgeos availability: TRUE
 library(scales)
 library(ggplot2)
 library(ggalt)
-#> ggalt is under *active* development. See https://github.com/hrbrmstr/ggalt for changes
 library(albersusa)
 library(ggthemes)
 library(colormap)
@@ -169,9 +162,9 @@ gg_usa +
                       colormap = colormaps$copper, reverse = T, discrete = F)
 ```
 
-![plot of chunk maps](README-maps-1.png)
+![](README-maps-1.png)
 
-```r
+``` r
 
 
 counties <- counties_composite()
@@ -195,12 +188,11 @@ gg_counties +
         legend.position = 'bottom', legend.direction = "horizontal")
 ```
 
-![plot of chunk maps](README-maps-2.png)
+![](README-maps-2.png)
 
 Here is a plot showing all possible palettes.
 
-
-```r
+``` r
 par(mfrow=c(44,1))
 par(mar=rep(0.25,4))
 purrr::walk(colormaps, function(x) { 
@@ -209,4 +201,4 @@ purrr::walk(colormaps, function(x) {
   })
 ```
 
-![plot of chunk plot](README-plot-1.png)
+![](README-plot-1.png)
