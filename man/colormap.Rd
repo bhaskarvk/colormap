@@ -10,8 +10,13 @@ colormap(colormap = colormaps$jet, nshades = 72, format = "hex",
   alpha = 1, reverse = FALSE)
 }
 \arguments{
-\item{colormap}{A string.
-You can use the colormaps list for a list of pre-defined palettes}
+\item{colormap}{A string, vector of hex color codes, or a list.
+Use the \code{\link{colormaps}} for a list of pre-defined palettes.
+OR
+A vector of colors in hex e.g. \code{c('#000000','#777777','#FFFFFF')}
+OR
+A list of list e.g. \code{list(list(index=0,rgb=c(255,255,255)),list(index=1,rgb=c(255,0,0)))}
+The index should go from 0 to 1. see \url{https://www.npmjs.com/package/colormap#options}}
 
 \item{nshades}{A number.
 Number of colors to generate.}
@@ -34,6 +39,9 @@ Generate colors from a list of 44 palettes
 \examples{
 colormap() # Defaults to 72 colors from the 'jet' palette.
 colormap(colormap=colormaps$temperature, nshades=20) # Diff Palette
+colormap(colormap=c('#000000','#FF0000'), nshades=20) # Colormap as vector of colors
+# list of list. Maximum flexibility
+colormap(colormap=list(list(index=0,rgb=c(0,0,0)),list(index=1,rgb=c(255,255,255))), nshades=10)
 colormap(format='rgb',nshades=10) # As rgb
 colormap(format='rgb',nshades=10,alpha=0.5) # Constant alpha
 colormap(format='rgbaString',nshades=10) # As rgba string

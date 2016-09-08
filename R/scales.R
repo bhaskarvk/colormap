@@ -9,7 +9,7 @@
 #'
 #' @examples
 #' scales::show_col(colormap_pal()(10))
-#' scales::show_col(colormap_pal(colormap=colormaps$viridis)(100))
+#' scales::show_col(colormap_pal(colormap=colormaps$viridis)(100), labels=FALSE)
 #'
 #' @return A function that can generate colors from a specified colormap.
 #'

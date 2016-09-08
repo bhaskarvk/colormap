@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<title>Home. colormap 0.1.2</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="">
+
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.css" rel="stylesheet">
+<link href="css/highlight.css" rel="stylesheet">
+<link href="css/staticdocs.css" rel="stylesheet">
+
+<!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+<script type="text/javascript"
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+  </head>
+
+  <body>
+    <div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="index.html">colormap 0.1.2</a>
+      <div class="nav">
+        <ul class="nav">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="reference.html">Reference</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <header>
+        
+      </header>
+      
+      <div class="row">
+  <div class="span8">
+    <!-- README.md is generated from README.Rmd. Please edit that file -->
+
+<h1>Color Palettes from Node.js Colormap module.</h1>
+
+<p>This is an R package that allows you to generate colors from color palettes defined in Node.js&#39;s <a href="https://github.com/bpostlethwaite/colormap">colormap</a> module. In total it provides 44 distinct palettes made from sequential and/or diverging colors. In addition to the pre defined palettes you can also specify your own set of colors.</p>
+
+<p>There are also scale functions that can be used with ggplot2.</p>
+
+<h2>Credits</h2>
+
+<ul>
+<li>  The <a href="https://github.com/bpostlethwaite/colormap">colormap</a> Node.js module which does all the heavylifting.</li>
+<li>  The <a href="https://github.com/jeroenooms/V8">V8</a> package which allows R code to call Javascript code.</li>
+<li>  <a href="https://twitter.com/hrbrmstr">Bob Rudis</a>&#39;s <a href="https://github.com/hrbrmstr/zoneparser">zoneparser</a> package which I used as a skeleton for this pacakge.</li>
+<li>  <a href="https://twitter.com/sjmgarnier">Simon Garnier</a>&#39;s <a href="https://github.com/sjmgarnier/viridis">viridis</a> package for ggplot2 scale functions.</li>
+</ul>
+
+<h2>Updates</h2>
+
+<p><a href="https://travis-ci.org/bhaskarvk/colormap"><img src="https://travis-ci.org/bhaskarvk/colormap.svg?branch=master" alt="Travis-CI Build Status"/></a> <a href="https://ci.appveyor.com/project/bhaskarvk/colormap"><img src="https://ci.appveyor.com/api/projects/status/github/bhaskarvk/colormap?branch=master&amp;svg=true" alt="AppVeyor Build Status"/></a></p>
+
+<ul>
+<li>  2016-09-06 Ability to generate a custom palette.</li>
+<li>  2016-08-30 Input Validation and ggplot2 scales.</li>
+<li>  2016-08-29 First Release.</li>
+</ul>
+
+<h2>Installation</h2>
+
+<p>Requires <a href="https://cran.r-project.org/web/packages/V8/index.html">V8</a></p>
+
+<pre><code class="r">if(!require(&quot;V8&quot;)) install.packages(&quot;V8&quot;)
+if(!require(&quot;devtools&quot;)) install.packages(&quot;devtools&quot;)
+devtools::install_github(&quot;bhaskarvk/colormap&quot;)
+</code></pre>
+
+<h2>Usage</h2>
+
+<p>The main function is <code>colormap</code> which takes 5 optional arguments</p>
+
+<ul>
+<li>  colormap: A string representing one of the 44 built-in colormaps.You can use the <code>colormaps</code> list to specify a value. e.g. <code>colormaps$density</code> <strong>OR</strong> A vector of colors in hex e.g. c(&#39;#000000&#39;,&#39;#777777&#39;,&#39;#FFFFFF&#39;) <strong>OR</strong> A list of list e.g. list(list(index=0,rgb=c(255,255,255)),list(index=1,rgb=c(255,0,0)))</li>
+<li>  nshades: Number of colors to generate.</li>
+<li>  format: one of &#39;hex&#39;, &#39;rgb&#39;, &#39;rgbaString&#39;</li>
+<li>  alpha: Between 0 &amp; 1 to specify the transparency.</li>
+<li>  reverse: Boolean. Whether to reverse the order of the colors returned or not.</li>
+</ul>
+
+<h2>Example</h2>
+
+<pre><code class="r">library(colormap)
+
+# Defaults to 72 colors from the &#39;jet&#39; palette.
+scales::show_col(colormap(), labels = F)
+</code></pre>
+
+<p><img src="README-eg1-1.png" alt=""/></p>
+
+<pre><code class="r">
+# Specify a different palette from a list of pre-defined palette.
+scales::show_col(colormap(colormap=colormaps$temperature, nshades=20))
+</code></pre>
+
+<p><img src="README-eg1-2.png" alt=""/></p>
+
+<pre><code class="r">
+# Specify opacity value.
+scales::show_col(colormap(colormap=colormaps$temperature, nshades=20, alpha=0.7))
+</code></pre>
+
+<p><img src="README-eg1-3.png" alt=""/></p>
+
+<pre><code class="r">
+# Specify colormap as vector of colors.
+scales::show_col(colormap(colormap=c(&#39;#FFFFFF&#39;,&#39;#FF0000&#39;),nshades = 12))
+</code></pre>
+
+<p><img src="README-eg1-4.png" alt=""/></p>
+
+<pre><code class="r">
+# Specify colormap as list of lists.
+scales::show_col(colormap(colormap=list(list(index=0,rgb=c(0,255,0)),
+                                        list(index=1,rgb=c(255,0,255))),
+                          nshades=12, alpha=0.65))
+</code></pre>
+
+<p><img src="README-eg1-5.png" alt=""/></p>
+
+<p>You can also get the colors in a &#39;rgb&#39; matrix and a rgba string vector format</p>
+
+<pre><code class="r">colormap(format=&#39;rgb&#39;,nshades=5) # As rgb
+#&gt;      [,1] [,2] [,3] [,4]
+#&gt; [1,]    0    0  131    1
+#&gt; [2,]    2  156  212    1
+#&gt; [3,]  128  255  130    1
+#&gt; [4,]  253  130    0    1
+#&gt; [5,]  128    0    0    1
+
+colormap(format=&#39;rgbaString&#39;,nshades=10) # As rgba string
+#&gt;  [1] &quot;rgba(0,0,131,1)&quot;    &quot;rgba(0,54,166,1)&quot;   &quot;rgba(2,134,202,1)&quot; 
+#&gt;  [4] &quot;rgba(4,224,242,1)&quot;  &quot;rgba(72,255,186,1)&quot; &quot;rgba(188,255,69,1)&quot;
+#&gt;  [7] &quot;rgba(254,215,0,1)&quot;  &quot;rgba(252,97,0,1)&quot;   &quot;rgba(238,0,0,1)&quot;   
+#&gt; [10] &quot;rgba(128,0,0,1)&quot;
+</code></pre>
+
+<p>You also get <code>scale_fill_colormap</code> and <code>scale_color_colormap</code> functions for using these palettes in ggplot2 plots. Check <code>?colormap::scale_fill_colormap</code> for details.</p>
+
+<pre><code class="r">library(ggplot2)
+
+# Continuous color scale
+ggplot(mtcars,aes(x=wt,y=mpg)) + geom_point(aes(color=hp)) +
+  theme_minimal() +
+  scale_color_colormap(&#39;Horse Power&#39;,
+                       discrete = F,colormap = colormaps$viridis, reverse = T)
+</code></pre>
+
+<p><img src="README-ggplot2-1.png" alt=""/></p>
+
+<pre><code class="r">
+ggplot(mtcars,aes(x=wt,y=mpg)) + geom_point(aes(color=as.factor(cyl))) +
+  theme_minimal() +
+  scale_color_colormap(&#39;Cylinder&#39;,
+                       discrete = T,colormap = colormaps$warm, reverse = T)
+</code></pre>
+
+<p><img src="README-ggplot2-2.png" alt=""/></p>
+
+<p>Here are two choroplethes using <code>scale_fill_colormap</code>.</p>
+
+<pre><code class="r">library(maptools)
+#&gt; Loading required package: sp
+#&gt; Checking rgeos availability: TRUE
+library(scales)
+library(ggplot2)
+library(ggalt)
+#&gt; ggalt is under *active* development. See https://github.com/hrbrmstr/ggalt for changes
+library(albersusa)
+library(ggthemes)
+library(colormap)
+
+us &lt;- usa_composite()
+us_map &lt;- fortify(us, region=&quot;name&quot;)
+
+gg_usa &lt;- ggplot()
+gg_usa &lt;- gg_usa + geom_map(data=us_map, map=us_map,
+                    aes(x=long, y=lat, map_id=id),
+                    color=&quot;#2b2b2b&quot;, size=0.1, fill=NA)
+gg_usa &lt;- gg_usa + theme_map()
+gg_usa &lt;- gg_usa + 
+  geom_map(data=us@data, map=us_map,
+           aes(fill=pop_2014, map_id=name),
+           color=&quot;white&quot;, size=0.1) +
+  coord_proj(us_laea_proj) +
+  theme(legend.position=&quot;right&quot;)
+
+gg_usa +
+  scale_fill_colormap(&quot;State Population\n(2014 Estimates)&quot;, labels=comma,
+                      colormap = colormaps$copper, reverse = T, discrete = F)
+</code></pre>
+
+<p><img src="README-maps-1.png" alt=""/></p>
+
+<pre><code class="r">
+
+counties &lt;- counties_composite()
+
+counties_map &lt;- fortify(counties, region=&quot;fips&quot;)
+
+gg_counties &lt;- ggplot()
+gg_counties &lt;- gg_counties + geom_map(data=counties_map, map=counties_map,
+                    aes(x=long, y=lat, map_id=id),
+                    color=&quot;#2b2b2b&quot;, size=0.1, fill=NA)
+gg_counties &lt;- gg_counties + theme_map() +
+  coord_proj(us_laea_proj, xlim = c(-122, -74.5 )) 
+gg_counties &lt;- gg_counties + 
+  geom_map(data=counties@data, map=counties_map,
+           aes(fill=population/census_area, map_id=fips),
+           color=&quot;white&quot;, size=0.1)
+gg_counties +
+  scale_fill_colormap(&quot;County Population Density&quot;, labels=comma, trans = &#39;log10&#39;,
+                      colormap = colormaps$picnic, reverse = F, discrete = F) +
+  theme(#panel.border = element_rect(colour = &quot;black&quot;, fill=NA, size=1),
+        legend.position = &#39;bottom&#39;, legend.direction = &quot;horizontal&quot;)
+</code></pre>
+
+<p><img src="README-maps-2.png" alt=""/></p>
+
+<p>Here is a plot showing all 44 pre-defined color palettes and the colors they generate.</p>
+
+<pre><code class="r">par(mfrow=c(44,1))
+par(mar=rep(0.25,4))
+purrr::walk(colormaps, function(x) { 
+  barplot(rep(1,72), yaxt=&quot;n&quot;, space=c(0,0),border=NA,
+          col=colormap(colormap=x), main = sprintf(&quot;\n\n%s&quot;,x))
+  })
+</code></pre>
+
+<p><img src="README-plot-1.png" alt=""/></p>
+
+  </div>
+
+  <div class="span3 offset1 sidebar">
+        <h2>Authors</h2>
+    <ul>
+      <li><a href='mailto:bhaskarvk@gmail.com'>Bhaskar Karambelkar</a> [aut, cre]</li>
+    </ul>
+  </div>
+</div>
+      
+      <footer>
+      <p class="pull-right"><a href="#">Back to top</a></p>
+<p>Built by <a href="https://github.com/hadley/staticdocs">staticdocs</a>. Styled with <a href="https://getbootstrap.com/2.0.4/">bootstrap</a>.</p>
+      </footer>
+    </div>
+  </body>
+</html>

@@ -3,7 +3,9 @@
 Color Palettes from Node.js Colormap module.
 ============================================
 
-This is an R package that allows you to generate colors from color palettes defined in Node [colormap](https://github.com/bpostlethwaite/colormap) module. In addition it provides scales functions for use in ggplot2 plots. In total it provides 44 distinct palettes made from sequential and/or diverging colors.
+This is an R package that allows you to generate colors from color palettes defined in Node.js's [colormap](https://github.com/bpostlethwaite/colormap) module. In total it provides 44 distinct palettes made from sequential and/or diverging colors. In addition to the pre defined palettes you can also specify your own set of colors.
+
+There are also scale functions that can be used with ggplot2.
 
 Credits
 -------
@@ -18,6 +20,7 @@ Updates
 
 [![Travis-CI Build Status](https://travis-ci.org/bhaskarvk/colormap.svg?branch=master)](https://travis-ci.org/bhaskarvk/colormap) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/bhaskarvk/colormap?branch=master&svg=true)](https://ci.appveyor.com/project/bhaskarvk/colormap)
 
+-   2016-09-06 Ability to generate a custom palette.
 -   2016-08-30 Input Validation and ggplot2 scales.
 -   2016-08-29 First Release.
 
@@ -37,7 +40,7 @@ Usage
 
 The main function is `colormap` which takes 5 optional arguments
 
--   colormap: A string representing one of the 44 built-in colormaps.You can use the `colormaps` list to specify a value. e.g. `colormaps$density`
+-   colormap: A string representing one of the 44 built-in colormaps.You can use the `colormaps` list to specify a value. e.g. `colormaps$density` **OR** A vector of colors in hex e.g. c('\#000000','\#777777','\#FFFFFF') **OR** A list of list e.g. list(list(index=0,rgb=c(255,255,255)),list(index=1,rgb=c(255,0,0)))
 -   nshades: Number of colors to generate.
 -   format: one of 'hex', 'rgb', 'rgbaString'
 -   alpha: Between 0 & 1 to specify the transparency.
@@ -49,54 +52,56 @@ Example
 ``` r
 library(colormap)
 
-colormap() # Defaults to 72 colors from the 'jet' palette.
-#>  [1] "#000083ff" "#000687ff" "#000e8cff" "#001390ff" "#001b95ff"
-#>  [6] "#00239aff" "#00299dff" "#0030a2ff" "#0036a6ff" "#003caaff"
-#> [11] "#0048afff" "#0152b3ff" "#015eb9ff" "#0167bdff" "#0174c2ff"
-#> [16] "#0280c8ff" "#0289ccff" "#0296d1ff" "#039fd5ff" "#03abdbff"
-#> [21] "#03b8e0ff" "#03c1e4ff" "#04cde9ff" "#04d7edff" "#04e3f3ff"
-#> [26] "#05f0f8ff" "#05f9fcff" "#09fffbff" "#15ffefff" "#25ffdfff"
-#> [31] "#35ffceff" "#41ffc2ff" "#50ffb2ff" "#5cffa6ff" "#6cff96ff"
-#> [36] "#7cff86ff" "#88ff79ff" "#98ff69ff" "#a8ff59ff" "#b4ff4dff"
-#> [41] "#c3ff3dff" "#cfff31ff" "#dfff20ff" "#efff10ff" "#fbff04ff"
-#> [46] "#fff700ff" "#ffeb00ff" "#fedb00ff" "#feca00ff" "#febe00ff"
-#> [51] "#fdae00ff" "#fda200ff" "#fd9200ff" "#fd8200ff" "#fc7500ff"
-#> [56] "#fc6500ff" "#fc5900ff" "#fb4900ff" "#fb3900ff" "#fb2d00ff"
-#> [61] "#fb1c00ff" "#fa1000ff" "#fa0000ff" "#ee0000ff" "#e20000ff"
-#> [66] "#d30000ff" "#c70000ff" "#b70000ff" "#a70000ff" "#9c0000ff"
-#> [71] "#8c0000ff" "#800000ff"
+# Defaults to 72 colors from the 'jet' palette.
+scales::show_col(colormap(), labels = F)
+```
 
-colormap(colormap=colormaps$temperature, nshades=20) # Diff Palette
-#>  [1] "#042333ff" "#0c2a50ff" "#13306dff" "#253582ff" "#403891ff"
-#>  [6] "#593d9cff" "#6b4596ff" "#7e4e90ff" "#90548bff" "#a65c85ff"
-#> [11] "#b8627dff" "#cc6a70ff" "#de7065ff" "#eb8055ff" "#f68f46ff"
-#> [16] "#f9a242ff" "#f9b641ff" "#f7cb44ff" "#efe350ff" "#e8fa5bff"
+![](README-eg1-1.png)
 
-colormap(format='rgb',nshades=10) # As rgb
-#>       [,1] [,2] [,3] [,4]
-#>  [1,]    0    0  131    1
-#>  [2,]    0   54  166    1
-#>  [3,]    2  134  202    1
-#>  [4,]    4  224  242    1
-#>  [5,]   72  255  186    1
-#>  [6,]  188  255   69    1
-#>  [7,]  254  215    0    1
-#>  [8,]  252   97    0    1
-#>  [9,]  238    0    0    1
-#> [10,]  128    0    0    1
+``` r
 
-colormap(format='rgb',nshades=10,alpha=0.5) # Constant alpha
-#>       [,1] [,2] [,3] [,4]
-#>  [1,]    0    0  131  0.5
-#>  [2,]    0   54  166  0.5
-#>  [3,]    2  134  202  0.5
-#>  [4,]    4  224  242  0.5
-#>  [5,]   72  255  186  0.5
-#>  [6,]  188  255   69  0.5
-#>  [7,]  254  215    0  0.5
-#>  [8,]  252   97    0  0.5
-#>  [9,]  238    0    0  0.5
-#> [10,]  128    0    0  0.5
+# Specify a different palette from a list of pre-defined palette.
+scales::show_col(colormap(colormap=colormaps$temperature, nshades=20))
+```
+
+![](README-eg1-2.png)
+
+``` r
+
+# Specify opacity value.
+scales::show_col(colormap(colormap=colormaps$temperature, nshades=20, alpha=0.7))
+```
+
+![](README-eg1-3.png)
+
+``` r
+
+# Specify colormap as vector of colors.
+scales::show_col(colormap(colormap=c('#FFFFFF','#FF0000'),nshades = 12))
+```
+
+![](README-eg1-4.png)
+
+``` r
+
+# Specify colormap as list of lists.
+scales::show_col(colormap(colormap=list(list(index=0,rgb=c(0,255,0)),
+                                        list(index=1,rgb=c(255,0,255))),
+                          nshades=12, alpha=0.65))
+```
+
+![](README-eg1-5.png)
+
+You can also get the colors in a 'rgb' matrix and a rgba string vector format
+
+``` r
+colormap(format='rgb',nshades=5) # As rgb
+#>      [,1] [,2] [,3] [,4]
+#> [1,]    0    0  131    1
+#> [2,]    2  156  212    1
+#> [3,]  128  255  130    1
+#> [4,]  253  130    0    1
+#> [5,]  128    0    0    1
 
 colormap(format='rgbaString',nshades=10) # As rgba string
 #>  [1] "rgba(0,0,131,1)"    "rgba(0,54,166,1)"   "rgba(2,134,202,1)" 
@@ -138,6 +143,7 @@ library(maptools)
 library(scales)
 library(ggplot2)
 library(ggalt)
+#> ggalt is under *active* development. See https://github.com/hrbrmstr/ggalt for changes
 library(albersusa)
 library(ggthemes)
 library(colormap)
@@ -190,7 +196,7 @@ gg_counties +
 
 ![](README-maps-2.png)
 
-Here is a plot showing all possible palettes.
+Here is a plot showing all 44 pre-defined color palettes and the colors they generate.
 
 ``` r
 par(mfrow=c(44,1))

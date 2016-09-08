@@ -1,7 +1,7 @@
 Package: colormap
 Type: Package
 Title: Color palettes using colormaps Node module.
-Version: 0.1.1
+Version: 0.1.2
 Authors@R: person("Bhaskar", "Karambelkar", email = "bhaskarvk@gmail.com",
     role = c("aut", "cre"))
 Description: See README for details.

@@ -71,8 +71,13 @@ colormaps <- list(
 #' Generate colors from a list of 44 palettes
 #'
 #' @export
-#' @param colormap A string.
-#' You can use the colormaps list for a list of pre-defined palettes
+#' @param colormap A string, vector of hex color codes, or a list.
+#' Use the \code{\link{colormaps}} for a list of pre-defined palettes.
+#' OR
+#' A vector of colors in hex e.g. \code{c('#000000','#777777','#FFFFFF')}
+#' OR
+#' A list of list e.g. \code{list(list(index=0,rgb=c(255,255,255)),list(index=1,rgb=c(255,0,0)))}
+#' The index should go from 0 to 1. see \url{https://www.npmjs.com/package/colormap#options}
 #' @param nshades A number.
 #' Number of colors to generate.
 #' @param format A string.
@@ -84,6 +89,9 @@ colormaps <- list(
 #' @examples
 #' colormap() # Defaults to 72 colors from the 'jet' palette.
 #' colormap(colormap=colormaps$temperature, nshades=20) # Diff Palette
+#' colormap(colormap=c('#000000','#FF0000'), nshades=20) # Colormap as vector of colors
+#' # list of list. Maximum flexibility
+#' colormap(colormap=list(list(index=0,rgb=c(0,0,0)),list(index=1,rgb=c(255,255,255))), nshades=10)
 #' colormap(format='rgb',nshades=10) # As rgb
 #' colormap(format='rgb',nshades=10,alpha=0.5) # Constant alpha
 #' colormap(format='rgbaString',nshades=10) # As rgba string
@@ -91,9 +99,16 @@ colormap <- function(colormap=colormaps$jet, nshades=72,
                      format='hex', alpha=1, reverse=FALSE) {
 
   # validate inputs
-  if(! (colormap %in% colormaps )) {
-    stop(sprintf("Unrecognised colormap: '%s'.\n See the colormap::colormaps for a list of allowed colormaps",
-         colormap))
+  if(inherits(colormap,'character')) {
+    if(length(colormap)==1 && ! (colormap %in% colormaps) ) {
+      stop(sprintf("Unrecognised colormap: '%s'.\n See the colormap::colormaps for a list of allowed colormaps",
+           colormap))
+    } else if(length(colormap)>1 && !(all(grepl('^#[0-9a-f]{6}$',colormap,
+                                                ignore.case = T)))) {
+    stop("colormap parameter should be a single string from the colormap::colormaps list or a vector of strings in HEX color format\n e.g. colormap='jet' or colormap=c('#FCFDA1','#FF0033')")
+    }
+  } else if(!inherits(colormap,'list')) {
+    stop("colormap parameter should be a single string from the colormap::colormaps list or a vector of strings in HEX color format\n e.g. colormap='jet' or colormap=c('#FCFDA1','#FF0033') or a list of lists e.g. colormap=list(list(index=0,rgb=c(0,0,0)),list(index=1,rgb=c(255,255,255)))")
   }
 
   if(!(is.numeric(alpha) && alpha >=0 && alpha <= 1)) {
@@ -106,6 +121,16 @@ colormap <- function(colormap=colormaps$jet, nshades=72,
 
   if(!is.numeric(nshades)) {
     stop("nshades needs to be a number")
+  }
+
+  # If colormap is a vector of hex strings, convert it to a format that the function expects
+  if(inherits(colormap,'character') && length(colormap)>1) {
+    cols <- unlist(apply(col2rgb(sort(colormap)),2,
+                         function(x)list(rgb=c(x[[1]],x[[2]],x[[3]]))),
+                   recursive = F)
+    colIndx <- c(0,(getIndexes(100,length(colormap))/100)[-1])
+    colormap <- mapply(function(a,b)list(index=a,rgb=b),colIndx,cols,
+                       SIMPLIFY = F)
   }
 
   # Ideally I would like to avoid this check.

@@ -14,7 +14,9 @@ knitr::opts_chunk$set(
 
 # Color Palettes from Node.js Colormap module.
 
-This is an R package that allows you to generate colors from color palettes defined in Node [colormap](https://github.com/bpostlethwaite/colormap) module. In addition it provides scales functions for use in ggplot2 plots. In total it provides 44 distinct palettes made from sequential and/or diverging colors.
+This is an R package that allows you to generate colors from color palettes defined in Node.js's [colormap](https://github.com/bpostlethwaite/colormap) module. In total it provides 44 distinct palettes made from sequential and/or diverging colors. In addition to the pre defined palettes you can also specify your own set of colors.
+
+There are also scale functions that can be used with ggplot2.
 
 ## Credits
 
@@ -27,6 +29,7 @@ This is an R package that allows you to generate colors from color palettes defi
 
 [![Travis-CI Build Status](https://travis-ci.org/bhaskarvk/colormap.svg?branch=master)](https://travis-ci.org/bhaskarvk/colormap) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/bhaskarvk/colormap?branch=master&svg=true)](https://ci.appveyor.com/project/bhaskarvk/colormap)
 
+- 2016-09-06 Ability to generate a custom palette.
 - 2016-08-30 Input Validation and ggplot2 scales.
 - 2016-08-29 First Release.
 
@@ -45,7 +48,7 @@ devtools::install_github("bhaskarvk/colormap")
 
 The main function is `colormap` which takes 5 optional arguments
 
-- colormap: A string representing one of the 44 built-in colormaps.\n You can use the `colormaps` list to specify a value. e.g. `colormaps$density`
+- colormap: A string representing one of the 44 built-in colormaps.\n You can use the `colormaps` list to specify a value. e.g. `colormaps$density` **OR** A vector of colors in hex e.g. c('#000000','#777777','#FFFFFF') **OR** A list of list e.g. list(list(index=0,rgb=c(255,255,255)),list(index=1,rgb=c(255,0,0)))
 - nshades: Number of colors to generate.
 - format: one of 'hex', 'rgb', 'rgbaString'
 - alpha: Between 0 & 1 to specify the transparency.
@@ -56,13 +59,28 @@ The main function is `colormap` which takes 5 optional arguments
 ```{r eg1}
 library(colormap)
 
-colormap() # Defaults to 72 colors from the 'jet' palette.
+# Defaults to 72 colors from the 'jet' palette.
+scales::show_col(colormap(), labels = F)
 
-colormap(colormap=colormaps$temperature, nshades=20) # Diff Palette
+# Specify a different palette from a list of pre-defined palette.
+scales::show_col(colormap(colormap=colormaps$temperature, nshades=20))
 
-colormap(format='rgb',nshades=10) # As rgb
+# Specify opacity value.
+scales::show_col(colormap(colormap=colormaps$temperature, nshades=20, alpha=0.7))
 
-colormap(format='rgb',nshades=10,alpha=0.5) # Constant alpha
+# Specify colormap as vector of colors.
+scales::show_col(colormap(colormap=c('#FFFFFF','#FF0000'),nshades = 12))
+
+# Specify colormap as list of lists.
+scales::show_col(colormap(colormap=list(list(index=0,rgb=c(0,255,0)),
+                                        list(index=1,rgb=c(255,0,255))),
+                          nshades=12, alpha=0.65))
+```
+
+You can also get the colors in a 'rgb' matrix and a rgba string vector format
+
+```{r eg2}
+colormap(format='rgb',nshades=5) # As rgb
 
 colormap(format='rgbaString',nshades=10) # As rgba string
 ```
@@ -70,7 +88,7 @@ colormap(format='rgbaString',nshades=10) # As rgba string
 You also get `scale_fill_colormap` and `scale_color_colormap` functions for using these palettes in ggplot2 plots. Check `?colormap::scale_fill_colormap` for details.
 
 
-```{r ggplot2}
+```{r ggplot2, fig.width=6, fig.height=4}
 library(ggplot2)
 
 # Continuous color scale
@@ -139,7 +157,7 @@ gg_counties +
 
 ```
 
-Here is a plot showing all possible palettes.
+Here is a plot showing all 44 pre-defined color palettes and the colors they generate.
 
 ```{r plot, fig.height=18}
 par(mfrow=c(44,1))

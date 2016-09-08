@@ -1,3 +1,7 @@
+# colormap 0.1.2
+
+* Added ability to generate custom palette.
+
 # colormap 0.1.1
 
 * Added code to evenly distribute colors over the whole range of the palette.

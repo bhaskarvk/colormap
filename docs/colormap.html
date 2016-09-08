@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<title>colormap. colormap 0.1.2</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="
+Bhaskar V. Karambelkar
+">
+
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.css" rel="stylesheet">
+<link href="css/highlight.css" rel="stylesheet">
+<link href="css/staticdocs.css" rel="stylesheet">
+
+<!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+<script type="text/javascript"
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+  </head>
+
+  <body>
+    <div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="index.html">colormap 0.1.2</a>
+      <div class="nav">
+        <ul class="nav">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="reference.html">Reference</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <header>
+        
+      </header>
+      
+      <h1>A package to generate colors from a list of 44 pre-defined palettes</h1>
+
+<div class="row">
+  <div class="span8">
+    <h2>Usage</h2>
+    <pre><span class="functioncall"><a href='colormap.html'>colormap</a></span><span class="keyword">(</span><span class="argument">colormap</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="symbol">colormaps</span><span class="keyword">$</span><span class="symbol">jet</span><span class="keyword">,</span> <span class="argument">nshades</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">72</span><span class="keyword">,</span> <span class="argument">format</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="string">"hex"</span><span class="keyword">,</span>
+  <span class="argument">alpha</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">1</span><span class="keyword">,</span> <span class="argument">reverse</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">FALSE</span><span class="keyword">)</span></pre>
+    
+    <h2>Arguments</h2>
+    <dl>
+      <dt>colormap</dt>
+      <dd>A string, vector of hex color codes, or a list.
+Use the <code><a href='colormaps.html'>colormaps</a></code> for a list of pre-defined palettes.
+OR
+A vector of colors in hex e.g. <code>c(&#39;#000000&#39;,&#39;#777777&#39;,&#39;#FFFFFF&#39;)</code>
+OR
+A list of list e.g. <code>list(list(index=0,rgb=c(255,255,255)),list(index=1,rgb=c(255,0,0)))</code>
+The index should go from 0 to 1. see <a href = 'https://www.npmjs.com/package/colormap#options'>https://www.npmjs.com/package/colormap#options</a></dd>
+      <dt>nshades</dt>
+      <dd>A number.
+Number of colors to generate.</dd>
+      <dt>format</dt>
+      <dd>A string.
+Should be &#39;hex&#39;, &#39;rgb&#39;, or &#39;rgbaString&#39;</dd>
+      <dt>alpha</dt>
+      <dd>A Number between 0 and 1</dd>
+      <dt>reverse</dt>
+      <dd>Boolean. Whether to reverse the order.</dd>
+    </dl>
+    
+    <div class="Value">
+      <h2>Value</h2>
+
+      <p><dl>
+Colors either in vector, matrix, list format depending on format.
+</dl></p>
+
+    </div>
+
+    <div class="Description">
+      <h2>Description</h2>
+
+      <p>A package to generate colors from a list of 44 pre-defined palettes</p>
+
+      <p>Generate colors from a list of 44 palettes</p>
+
+    </div>
+    
+    <h2 id="examples">Examples</h2>
+    <pre class="examples"><div class='input'><span class="functioncall"><a href='colormap.html'>colormap</a></span><span class="keyword">(</span><span class="keyword">)</span> <span class="comment"># Defaults to 72 colors from the 'jet' palette.</span></div>
+<div class='output'> [1] &quot;#000083ff&quot; &quot;#000687ff&quot; &quot;#000e8cff&quot; &quot;#001390ff&quot; &quot;#001b95ff&quot; &quot;#00239aff&quot; &quot;#00299dff&quot;
+ [8] &quot;#0030a2ff&quot; &quot;#0036a6ff&quot; &quot;#003caaff&quot; &quot;#0048afff&quot; &quot;#0152b3ff&quot; &quot;#015eb9ff&quot; &quot;#0167bdff&quot;
+[15] &quot;#0174c2ff&quot; &quot;#0280c8ff&quot; &quot;#0289ccff&quot; &quot;#0296d1ff&quot; &quot;#039fd5ff&quot; &quot;#03abdbff&quot; &quot;#03b8e0ff&quot;
+[22] &quot;#03c1e4ff&quot; &quot;#04cde9ff&quot; &quot;#04d7edff&quot; &quot;#04e3f3ff&quot; &quot;#05f0f8ff&quot; &quot;#05f9fcff&quot; &quot;#09fffbff&quot;
+[29] &quot;#15ffefff&quot; &quot;#25ffdfff&quot; &quot;#35ffceff&quot; &quot;#41ffc2ff&quot; &quot;#50ffb2ff&quot; &quot;#5cffa6ff&quot; &quot;#6cff96ff&quot;
+[36] &quot;#7cff86ff&quot; &quot;#88ff79ff&quot; &quot;#98ff69ff&quot; &quot;#a8ff59ff&quot; &quot;#b4ff4dff&quot; &quot;#c3ff3dff&quot; &quot;#cfff31ff&quot;
+[43] &quot;#dfff20ff&quot; &quot;#efff10ff&quot; &quot;#fbff04ff&quot; &quot;#fff700ff&quot; &quot;#ffeb00ff&quot; &quot;#fedb00ff&quot; &quot;#feca00ff&quot;
+[50] &quot;#febe00ff&quot; &quot;#fdae00ff&quot; &quot;#fda200ff&quot; &quot;#fd9200ff&quot; &quot;#fd8200ff&quot; &quot;#fc7500ff&quot; &quot;#fc6500ff&quot;
+[57] &quot;#fc5900ff&quot; &quot;#fb4900ff&quot; &quot;#fb3900ff&quot; &quot;#fb2d00ff&quot; &quot;#fb1c00ff&quot; &quot;#fa1000ff&quot; &quot;#fa0000ff&quot;
+[64] &quot;#ee0000ff&quot; &quot;#e20000ff&quot; &quot;#d30000ff&quot; &quot;#c70000ff&quot; &quot;#b70000ff&quot; &quot;#a70000ff&quot; &quot;#9c0000ff&quot;
+[71] &quot;#8c0000ff&quot; &quot;#800000ff&quot;
+</div>
+<div class='input'><span class="functioncall"><a href='colormap.html'>colormap</a></span><span class="keyword">(</span><span class="argument">colormap</span><span class="argument">=</span><span class="symbol">colormaps</span><span class="keyword">$</span><span class="symbol">temperature</span><span class="keyword">,</span> <span class="argument">nshades</span><span class="argument">=</span><span class="number">20</span><span class="keyword">)</span> <span class="comment"># Diff Palette</span></div>
+<div class='output'> [1] &quot;#042333ff&quot; &quot;#0c2a50ff&quot; &quot;#13306dff&quot; &quot;#253582ff&quot; &quot;#403891ff&quot; &quot;#593d9cff&quot; &quot;#6b4596ff&quot;
+ [8] &quot;#7e4e90ff&quot; &quot;#90548bff&quot; &quot;#a65c85ff&quot; &quot;#b8627dff&quot; &quot;#cc6a70ff&quot; &quot;#de7065ff&quot; &quot;#eb8055ff&quot;
+[15] &quot;#f68f46ff&quot; &quot;#f9a242ff&quot; &quot;#f9b641ff&quot; &quot;#f7cb44ff&quot; &quot;#efe350ff&quot; &quot;#e8fa5bff&quot;
+</div>
+<div class='input'><span class="functioncall"><a href='colormap.html'>colormap</a></span><span class="keyword">(</span><span class="argument">colormap</span><span class="argument">=</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/c'>c</a></span><span class="keyword">(</span><span class="string">'#000000'</span><span class="keyword">,</span><span class="string">'#FF0000'</span><span class="keyword">)</span><span class="keyword">,</span> <span class="argument">nshades</span><span class="argument">=</span><span class="number">20</span><span class="keyword">)</span> <span class="comment"># Colormap as vector of colors</span></div>
+<div class='output'> [1] &quot;#000000ff&quot; &quot;#0d0000ff&quot; &quot;#1a0000ff&quot; &quot;#280000ff&quot; &quot;#350000ff&quot; &quot;#430000ff&quot; &quot;#500000ff&quot;
+ [8] &quot;#5e0000ff&quot; &quot;#6b0000ff&quot; &quot;#790000ff&quot; &quot;#860000ff&quot; &quot;#940000ff&quot; &quot;#a10000ff&quot; &quot;#af0000ff&quot;
+[15] &quot;#bc0000ff&quot; &quot;#ca0000ff&quot; &quot;#d70000ff&quot; &quot;#e50000ff&quot; &quot;#f20000ff&quot; &quot;#ff0000ff&quot;
+</div>
+<div class='input'><span class="comment"># list of list. Maximum flexibility</span>
+<span class="functioncall"><a href='colormap.html'>colormap</a></span><span class="keyword">(</span><span class="argument">colormap</span><span class="argument">=</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/list'>list</a></span><span class="keyword">(</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/list'>list</a></span><span class="keyword">(</span><span class="argument">index</span><span class="argument">=</span><span class="number">0</span><span class="keyword">,</span><span class="argument">rgb</span><span class="argument">=</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/c'>c</a></span><span class="keyword">(</span><span class="number">0</span><span class="keyword">,</span><span class="number">0</span><span class="keyword">,</span><span class="number">0</span><span class="keyword">)</span><span class="keyword">)</span><span class="keyword">,</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/list'>list</a></span><span class="keyword">(</span><span class="argument">index</span><span class="argument">=</span><span class="number">1</span><span class="keyword">,</span><span class="argument">rgb</span><span class="argument">=</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/c'>c</a></span><span class="keyword">(</span><span class="number">255</span><span class="keyword">,</span><span class="number">255</span><span class="keyword">,</span><span class="number">255</span><span class="keyword">)</span><span class="keyword">)</span><span class="keyword">)</span><span class="keyword">,</span> <span class="argument">nshades</span><span class="argument">=</span><span class="number">10</span><span class="keyword">)</span></div>
+<div class='output'> [1] &quot;#000000ff&quot; &quot;#1c1c1cff&quot; &quot;#383838ff&quot; &quot;#555555ff&quot; &quot;#717171ff&quot; &quot;#8e8e8eff&quot; &quot;#aaaaaaff&quot;
+ [8] &quot;#c7c7c7ff&quot; &quot;#e3e3e3ff&quot; &quot;#ffffffff&quot;
+</div>
+<div class='input'><span class="functioncall"><a href='colormap.html'>colormap</a></span><span class="keyword">(</span><span class="argument">format</span><span class="argument">=</span><span class="string">'rgb'</span><span class="keyword">,</span><span class="argument">nshades</span><span class="argument">=</span><span class="number">10</span><span class="keyword">)</span> <span class="comment"># As rgb</span></div>
+<div class='output'>      [,1] [,2] [,3] [,4]
+ [1,]    0    0  131    1
+ [2,]    0   54  166    1
+ [3,]    2  134  202    1
+ [4,]    4  224  242    1
+ [5,]   72  255  186    1
+ [6,]  188  255   69    1
+ [7,]  254  215    0    1
+ [8,]  252   97    0    1
+ [9,]  238    0    0    1
+[10,]  128    0    0    1
+</div>
+<div class='input'><span class="functioncall"><a href='colormap.html'>colormap</a></span><span class="keyword">(</span><span class="argument">format</span><span class="argument">=</span><span class="string">'rgb'</span><span class="keyword">,</span><span class="argument">nshades</span><span class="argument">=</span><span class="number">10</span><span class="keyword">,</span><span class="argument">alpha</span><span class="argument">=</span><span class="number">0.5</span><span class="keyword">)</span> <span class="comment"># Constant alpha</span></div>
+<div class='output'>      [,1] [,2] [,3] [,4]
+ [1,]    0    0  131  0.5
+ [2,]    0   54  166  0.5
+ [3,]    2  134  202  0.5
+ [4,]    4  224  242  0.5
+ [5,]   72  255  186  0.5
+ [6,]  188  255   69  0.5
+ [7,]  254  215    0  0.5
+ [8,]  252   97    0  0.5
+ [9,]  238    0    0  0.5
+[10,]  128    0    0  0.5
+</div>
+<div class='input'><span class="functioncall"><a href='colormap.html'>colormap</a></span><span class="keyword">(</span><span class="argument">format</span><span class="argument">=</span><span class="string">'rgbaString'</span><span class="keyword">,</span><span class="argument">nshades</span><span class="argument">=</span><span class="number">10</span><span class="keyword">)</span> <span class="comment"># As rgba string</span></div>
+<div class='output'> [1] &quot;rgba(0,0,131,1)&quot;    &quot;rgba(0,54,166,1)&quot;   &quot;rgba(2,134,202,1)&quot;  &quot;rgba(4,224,242,1)&quot; 
+ [5] &quot;rgba(72,255,186,1)&quot; &quot;rgba(188,255,69,1)&quot; &quot;rgba(254,215,0,1)&quot;  &quot;rgba(252,97,0,1)&quot;  
+ [9] &quot;rgba(238,0,0,1)&quot;    &quot;rgba(128,0,0,1)&quot;   
+</div></pre>
+  </div>
+  <div class="span4 sidebar">
+    <!-- <ul>
+      <li>colormap</li><li>colormap-package</li>
+    </ul>
+    <ul>
+      
+    </ul> -->
+
+
+
+    <h2>Author</h2>
+    
+Bhaskar V. Karambelkar
+
+
+  </div>
+</div>
+      
+      <footer>
+      <p class="pull-right"><a href="#">Back to top</a></p>
+<p>Built by <a href="https://github.com/hadley/staticdocs">staticdocs</a>. Styled with <a href="https://getbootstrap.com/2.0.4/">bootstrap</a>.</p>
+      </footer>
+    </div>
+  </body>
+</html>

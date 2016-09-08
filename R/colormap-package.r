@@ -2,5 +2,6 @@
 #'
 #' @name colormap
 #' @docType package
+#' @importFrom grDevices col2rgb
 #' @author Bhaskar V. Karambelkar
 NULL
