@@ -1,10 +1,10 @@
 Package: colormap
 Type: Package
-Title: Color palettes using colormaps Node module
+Title: Color Palettes using Colormaps Node Module
 Version: 0.2.0
 Authors@R: person("Bhaskar", "Karambelkar", email = "bhaskarvk@gmail.com",
     role = c("aut", "cre"))
-Description: See README for details.
+Description: This is an R package that allows you to generate colors from color palettes defined in Node.js's colormap (https://github.com/bpostlethwaite/colormap) module. In total it provides 44 distinct palettes made from sequential and/or diverging colors. In addition to the pre defined palettes you can also specify your own set of colors. There are also scale functions that can be used with ggplot2.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
