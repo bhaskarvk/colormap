@@ -126,7 +126,7 @@ Hash: 87165608ca8aeb0958835c3c5b52b6b7
 Package: dplyr
 Source: CRAN
 Version: 0.5.0
-Hash: 03e5e71801c0f49217922e2cd4680f06
+Hash: b9a1d2ab1df4c201505dbb687311bcfb
 Requires: BH, DBI, R6, Rcpp, assertthat, lazyeval, magrittr, tibble
 
 Package: evaluate
@@ -134,6 +134,10 @@ Source: CRAN
 Version: 0.10
 Hash: c3601a10c987d439e0c63ec635234a76
 Requires: stringr
+
+Package: foreign
+Source: CRAN
+Version: 0.8-67
 
 Package: formatR
 Source: CRAN
@@ -148,10 +152,14 @@ Requires: RColorBrewer, ash, dplyr, ggplot2, gtable, maps, proj4,
     scales
 
 Package: ggplot2
-Source: CRAN
-Version: 2.1.0
-Hash: 50e297b0191179c39c7dcae0eff72b51
-Requires: digest, gtable, plyr, reshape2, scales
+Source: github
+Version: 2.1.0.9001
+Hash: daa81465128750a4653852a507005ad8
+Requires: digest, gtable, lazyeval, plyr, reshape2, scales, tibble
+GithubRepo: ggplot2
+GithubUsername: hadley
+GithubRef: master
+GithubSha1: 170919680836605bdf01588727a79bf5ff5ddb55
 
 Package: ggthemes
 Source: CRAN
@@ -202,6 +210,10 @@ Source: CRAN
 Version: 0.3
 Hash: ecf589b42cd284b03a4beb9665482d3e
 
+Package: lattice
+Source: CRAN
+Version: 0.20-34
+
 Package: lazyeval
 Source: CRAN
 Version: 0.2.0
@@ -221,7 +233,7 @@ Package: maptools
 Source: CRAN
 Version: 0.8-39
 Hash: f88d489894305e514eacb380f4cb2008
-Requires: sp
+Requires: foreign, lattice, sp
 
 Package: markdown
 Source: CRAN
@@ -281,12 +293,12 @@ Package: psych
 Source: CRAN
 Version: 1.6.9
 Hash: 663c0ab3af51e3b685a10d7d12d7078f
-Requires: mnormt
+Requires: foreign, mnormt
 
 Package: purrr
 Source: CRAN
 Version: 0.2.2
-Hash: 14bc8b3a4c61f67866ebfb413f77ff9f
+Hash: 912c7fb9ba669cda80904ad87e8724d1
 Requires: BH, Rcpp, dplyr, lazyeval, magrittr
 
 Package: reshape2
@@ -326,15 +338,20 @@ Version: 0.6
 Hash: fd256f8bfb9a64cc35f98b0decb1a79f
 
 Package: scales
-Source: CRAN
-Version: 0.4.0
-Hash: c4a91e7a322e03813b68b73940ce031f
+Source: github
+Version: 0.4.0.9003
+Hash: b59ba6a87db4db2098643038e8c75543
 Requires: RColorBrewer, Rcpp, dichromat, labeling, munsell, plyr
+GithubRepo: scales
+GithubUsername: hadley
+GithubRef: master
+GithubSha1: d58d83a9a6b344c1cb1a9e15373c7cd2bfb7f3d1
 
 Package: sp
 Source: CRAN
 Version: 1.2-3
 Hash: 50e24e98f39f1524698c2ccb3b30fdcf
+Requires: lattice
 
 Package: stringi
 Source: CRAN
