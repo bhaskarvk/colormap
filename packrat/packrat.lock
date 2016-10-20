@@ -64,6 +64,11 @@ Source: CRAN
 Version: 1.0-6
 Hash: 67d0775189fd0041d95abca618c5c07e
 
+Package: brew
+Source: CRAN
+Version: 1.0-6
+Hash: 931f9972deae0f205e1c78a51f33149b
+
 Package: broom
 Source: CRAN
 Version: 0.4.1
@@ -309,20 +314,22 @@ Hash: d0e9f583d85019c99a171b094979fcb3
 Requires: base64enc, caTools, evaluate, htmltools, jsonlite, knitr,
     tibble, yaml
 
+Package: roxygen2
+Source: CRAN
+Version: 5.0.1
+Hash: 77e2e933d3709300a251c7ef9cef82fc
+Requires: Rcpp, brew, digest, stringi, stringr
+
 Package: rstudioapi
 Source: CRAN
 Version: 0.6
 Hash: fd256f8bfb9a64cc35f98b0decb1a79f
 
 Package: scales
-Source: github
-Version: 0.4.0.9003
-Hash: b59ba6a87db4db2098643038e8c75543
+Source: CRAN
+Version: 0.4.0
+Hash: c4a91e7a322e03813b68b73940ce031f
 Requires: RColorBrewer, Rcpp, dichromat, labeling, munsell, plyr
-GithubRepo: scales
-GithubUsername: hadley
-GithubRef: master
-GithubSha1: d58d83a9a6b344c1cb1a9e15373c7cd2bfb7f3d1
 
 Package: sp
 Source: CRAN
