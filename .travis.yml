@@ -12,10 +12,12 @@ r_binary_packages:
   - devtools
   - stringr
   - V8
-  - scales
-  - ggplot2
   - testthat
-  - ggthemes
   - maptools
 r_github_packages:
   - hrbrmstr/ggalt
+  - hadley/scales
+  - hadley/ggplot2
+  - hrbrmstr/ggalt
+  - hrbrmstr/albersusa
+  - jrnold/ggthemes
