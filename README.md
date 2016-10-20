@@ -113,6 +113,14 @@ colormap(format='rgbaString',nshades=10) # As rgba string
 You also get `scale_fill_colormap` and `scale_color_colormap` functions for using these palettes in ggplot2 plots. Check `?colormap::scale_fill_colormap` for details.
 
 ``` r
+ensureCranPkg <- function(pkg) {
+  if(!suppressWarnings(requireNamespace(pkg, quietly = TRUE))) {
+    install.packages(pkg)
+  }
+}
+
+ensureCranPkg('ggplot2')
+
 library(ggplot2)
 
 # Continuous color scale
@@ -137,31 +145,36 @@ ggplot(mtcars,aes(x=wt,y=mpg)) + geom_point(aes(color=as.factor(cyl))) +
 Here are two choroplethes using `scale_fill_colormap`.
 
 ``` r
+ensureCranPkg('maptools')
+ensureCranPkg('scales')
+ensureCranPkg('ggplot2')
+ensureCranPkg('ggalt')
+ensureCranPkg('ggthemes')
+ensureCranPkg('devtools')
+
+if(!suppressWarnings(requireNamespace('albersusa', quietly = TRUE))) {
+  devtools::install_github('hrbrmstr/albersusa')
+}
+
 library(maptools)
 #> Loading required package: sp
 #> Checking rgeos availability: TRUE
 library(scales)
 library(ggplot2)
 library(ggalt)
-#> ggalt is under *active* development. See https://github.com/hrbrmstr/ggalt for changes
 library(albersusa)
 library(ggthemes)
 library(colormap)
 
 us <- usa_composite()
-us_map <- fortify(us, region="name")
+us_map <- fortify(us, region="fips_state")
 
-gg_usa <- ggplot()
-gg_usa <- gg_usa + geom_map(data=us_map, map=us_map,
-                    aes(x=long, y=lat, map_id=id),
-                    color="#2b2b2b", size=0.1, fill=NA)
-gg_usa <- gg_usa + theme_map()
-gg_usa <- gg_usa + 
-  geom_map(data=us@data, map=us_map,
-           aes(fill=pop_2014, map_id=name),
-           color="white", size=0.1) +
+gg_usa <- ggplot(us@data, aes(map_id=fips_state,fill=pop_2014)) +
+  geom_map(map=us_map, color='#ffffff', size=0.1) + 
+  expand_limits(x=us_map$long,y=us_map$lat) +
+  theme_map() +  
   coord_proj(us_laea_proj) +
-  theme(legend.position="right")
+  theme(legend.position="right") 
 
 gg_usa +
   scale_fill_colormap("State Population\n(2014 Estimates)", labels=comma,
@@ -177,16 +190,14 @@ counties <- counties_composite()
 
 counties_map <- fortify(counties, region="fips")
 
-gg_counties <- ggplot()
-gg_counties <- gg_counties + geom_map(data=counties_map, map=counties_map,
-                    aes(x=long, y=lat, map_id=id),
-                    color="#2b2b2b", size=0.1, fill=NA)
-gg_counties <- gg_counties + theme_map() +
-  coord_proj(us_laea_proj, xlim = c(-122, -74.5 )) 
-gg_counties <- gg_counties + 
-  geom_map(data=counties@data, map=counties_map,
-           aes(fill=population/census_area, map_id=fips),
-           color="white", size=0.1)
+gg_counties <- ggplot(counties@data, 
+                      aes(map_id=fips,fill=population/census_area)) +
+  geom_map(map=counties_map, color='#ffffff', size=0.1) + 
+  expand_limits(x=counties_map$long,y=counties_map$lat) +
+  theme_map() +  
+  coord_proj(us_laea_proj) +
+  theme(legend.position="right") 
+
 gg_counties +
   scale_fill_colormap("County Population Density", labels=comma, trans = 'log10',
                       colormap = colormaps$picnic, reverse = F, discrete = F) +
@@ -199,6 +210,9 @@ gg_counties +
 Here is a plot showing all 44 pre-defined color palettes and the colors they generate.
 
 ``` r
+ensureCranPkg('purrr')
+#> Installing package into '/opt/user/code/personal/github/colormap/packrat/lib/x86_64-apple-darwin15.6.0/3.3.1'
+#> (as 'lib' is unspecified)
 par(mfrow=c(44,1))
 par(mar=rep(0.25,4))
 purrr::walk(colormaps, function(x) { 
