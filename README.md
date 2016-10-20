@@ -173,7 +173,7 @@ gg_usa <- ggplot(us@data, aes(map_id=fips_state,fill=pop_2014)) +
   geom_map(map=us_map, color='#ffffff', size=0.1) + 
   expand_limits(x=us_map$long,y=us_map$lat) +
   theme_map() +  
-  coord_proj(us_laea_proj) +
+  #coord_proj(us_laea_proj) +
   theme(legend.position="right") 
 
 gg_usa +
@@ -195,7 +195,7 @@ gg_counties <- ggplot(counties@data,
   geom_map(map=counties_map, color='#ffffff', size=0.1) + 
   expand_limits(x=counties_map$long,y=counties_map$lat) +
   theme_map() +  
-  coord_proj(us_laea_proj) +
+  #coord_proj(us_laea_proj) +
   theme(legend.position="right") 
 
 gg_counties +
@@ -211,8 +211,6 @@ Here is a plot showing all 44 pre-defined color palettes and the colors they gen
 
 ``` r
 ensureCranPkg('purrr')
-#> Installing package into '/opt/user/code/personal/github/colormap/packrat/lib/x86_64-apple-darwin15.6.0/3.3.1'
-#> (as 'lib' is unspecified)
 par(mfrow=c(44,1))
 par(mar=rep(0.25,4))
 purrr::walk(colormaps, function(x) { 

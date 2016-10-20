@@ -28,6 +28,11 @@ Source: CRAN
 Version: 0.12.7
 Hash: f0ba7322cfb66f1b563462faa9c2b2ab
 
+Package: Rttf2pt1
+Source: CRAN
+Version: 1.3.4
+Hash: 4e454957bc4efd2dc8e2568ae1ff835d
+
 Package: V8
 Source: CRAN
 Version: 1.1
@@ -126,7 +131,7 @@ Hash: 87165608ca8aeb0958835c3c5b52b6b7
 Package: dplyr
 Source: CRAN
 Version: 0.5.0
-Hash: b9a1d2ab1df4c201505dbb687311bcfb
+Hash: 03e5e71801c0f49217922e2cd4680f06
 Requires: BH, DBI, R6, Rcpp, assertthat, lazyeval, magrittr, tibble
 
 Package: evaluate
@@ -135,9 +140,16 @@ Version: 0.10
 Hash: c3601a10c987d439e0c63ec635234a76
 Requires: stringr
 
-Package: foreign
+Package: extrafont
 Source: CRAN
-Version: 0.8-67
+Version: 0.17
+Hash: d9555d8cfe70b3372d066648400770b5
+Requires: Rttf2pt1, extrafontdb
+
+Package: extrafontdb
+Source: CRAN
+Version: 1.0
+Hash: 72269616f582dc675c90ecd025af2754
 
 Package: formatR
 Source: CRAN
@@ -145,11 +157,15 @@ Version: 1.4
 Hash: b2a47a2b91737978cf50ba95825a9cd1
 
 Package: ggalt
-Source: CRAN
-Version: 0.1.1
-Hash: ad4015df67ed2d8abfa4916b8752acc0
-Requires: RColorBrewer, ash, dplyr, ggplot2, gtable, maps, proj4,
-    scales
+Source: github
+Version: 0.3.1.9000
+Hash: 3306d770741226cc193ac5d82a17b3b7
+Requires: RColorBrewer, ash, dplyr, extrafont, ggplot2, gtable, maps,
+    plotly, proj4, scales
+GithubRepo: ggalt
+GithubUsername: hrbrmstr
+GithubRef: master
+GithubSha1: 93a7dd9ed71ddca0b3df7028ce5ae92fc6687df2
 
 Package: ggplot2
 Source: github
@@ -162,10 +178,14 @@ GithubRef: master
 GithubSha1: 170919680836605bdf01588727a79bf5ff5ddb55
 
 Package: ggthemes
-Source: CRAN
+Source: github
 Version: 3.2.0
-Hash: 44ef6d3a43f207cea8003ed2d69c9c36
+Hash: dcdce2f385497f427a4d6d865f04d606
 Requires: assertthat, colorspace, ggplot2, scales
+GithubRepo: ggthemes
+GithubUsername: jrnold
+GithubRef: master
+GithubSha1: c85a15e132a0faa04b590ad712e347b37c2064b5
 
 Package: git2r
 Source: CRAN
@@ -177,6 +197,11 @@ Source: CRAN
 Version: 0.2.0
 Hash: cd78381a9d3fea966ac39bd0daaf5554
 
+Package: hexbin
+Source: CRAN
+Version: 1.27.1
+Hash: 9f94c576cc4b9e83fd714ae8387272e6
+
 Package: highr
 Source: CRAN
 Version: 0.6
@@ -187,6 +212,12 @@ Source: CRAN
 Version: 0.3.5
 Hash: a96dc1cfe628e66337c86be732567df2
 Requires: Rcpp, digest
+
+Package: htmlwidgets
+Source: CRAN
+Version: 0.7
+Hash: f60506850a2d752dff69fc2a31c5a339
+Requires: htmltools, jsonlite, yaml
 
 Package: httr
 Source: CRAN
@@ -210,10 +241,6 @@ Source: CRAN
 Version: 0.3
 Hash: ecf589b42cd284b03a4beb9665482d3e
 
-Package: lattice
-Source: CRAN
-Version: 0.20-34
-
 Package: lazyeval
 Source: CRAN
 Version: 0.2.0
@@ -233,7 +260,7 @@ Package: maptools
 Source: CRAN
 Version: 0.8-39
 Hash: f88d489894305e514eacb380f4cb2008
-Requires: foreign, lattice, sp
+Requires: sp
 
 Package: markdown
 Source: CRAN
@@ -273,6 +300,14 @@ Source: CRAN
 Version: 0.4.8-1
 Hash: 6ad605ba7b4b476d84be6632393f5765
 
+Package: plotly
+Source: CRAN
+Version: 4.5.2
+Hash: 4344f5c47b8df6dae288601d4c0cee44
+Requires: base64enc, digest, dplyr, ggplot2, hexbin, htmlwidgets, httr,
+    jsonlite, lazyeval, magrittr, purrr, scales, tibble, tidyr,
+    viridisLite
+
 Package: plyr
 Source: CRAN
 Version: 1.8.4
@@ -293,12 +328,12 @@ Package: psych
 Source: CRAN
 Version: 1.6.9
 Hash: 663c0ab3af51e3b685a10d7d12d7078f
-Requires: foreign, mnormt
+Requires: mnormt
 
 Package: purrr
 Source: CRAN
 Version: 0.2.2
-Hash: 912c7fb9ba669cda80904ad87e8724d1
+Hash: 14bc8b3a4c61f67866ebfb413f77ff9f
 Requires: BH, Rcpp, dplyr, lazyeval, magrittr
 
 Package: reshape2
@@ -351,7 +386,6 @@ Package: sp
 Source: CRAN
 Version: 1.2-3
 Hash: 50e24e98f39f1524698c2ccb3b30fdcf
-Requires: lattice
 
 Package: stringi
 Source: CRAN
@@ -381,6 +415,11 @@ Source: CRAN
 Version: 0.6.0
 Hash: daf06bb30f2d9581e69609e0c0f7d38a
 Requires: Rcpp, dplyr, lazyeval, magrittr, stringi, tibble
+
+Package: viridisLite
+Source: CRAN
+Version: 0.1.3
+Hash: d16a33135b1f4c8818b8cd569da3913f
 
 Package: whisker
 Source: CRAN
