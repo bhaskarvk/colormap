@@ -1,3 +1,7 @@
+# colormap 0.1.3
+
+* Fixed all R CMD Check warnings/notes.
+
 # colormap 0.1.2
 
 * Added ability to generate custom palette.

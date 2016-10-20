@@ -1,3 +1,5 @@
+ct <- NULL # This will be our V8 context
+
 # Helper Function to sample n values from 1:N distributed evenly.
 # e.g.
 # getIndexes(255,3) = c(1,128,255)
@@ -133,13 +135,7 @@ colormap <- function(colormap=colormaps$jet, nshades=72,
                        SIMPLIFY = F)
   }
 
-  # Ideally I would like to avoid this check.
-  # But having this allows one to directly call colormaps::colormap()
-  # w/o having to attach the package.
-  if(!exists("ct", globalenv())) {
-    ct <<- V8::v8()
-    ct$source(system.file("js/colormap.js", package="colormap"))
-  }
+  initV8()
 
   # The Javascript lib doesn't do a good job picking out a small number of colors.
   # So we generate a large number of colors and sample accordingly.
@@ -168,11 +164,15 @@ colormap <- function(colormap=colormaps$jet, nshades=72,
   } else {
     val
   }
-
 }
 
-.onAttach <- function(libname, pkgname) {
-  ct <<- V8::v8()
-  ct$source(system.file("js/colormap.js", package="colormap"))
+initV8 <- function() {
+  if(is.null(ct)) {
+    ct <<- V8::v8()
+    ct$source(system.file("js/colormap.js", package="colormap"))
+  }
+}
 
+.onLoad <- function(libname, pkgname) {
+  initV8()
 }

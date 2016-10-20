@@ -1,7 +1,9 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
-^README\.Rmd$
-^README-.*\.png$
+^README.*$
 ^NEWS\.md$
 ^\.travis\.yml$
 ^appveyor\.yml$
+docs
+^.*\.png$
+^.*\.gif$
