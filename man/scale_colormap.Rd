@@ -6,10 +6,10 @@
 \alias{scale_fill_colormap}
 \title{Colormap color scales}
 \usage{
-scale_color_colormap(..., alpha = 1, colormap = colormaps$jet,
+scale_color_colormap(..., alpha = 1, colormap = colormaps$viridis,
   discrete = FALSE, reverse = FALSE)
 
-scale_fill_colormap(..., alpha = 1, colormap = colormaps$jet,
+scale_fill_colormap(..., alpha = 1, colormap = colormaps$viridis,
   discrete = FALSE, reverse = FALSE)
 }
 \arguments{

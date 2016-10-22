@@ -6,7 +6,7 @@
 \alias{colormap-package}
 \title{A package to generate colors from a list of 44 pre-defined palettes}
 \usage{
-colormap(colormap = colormaps$jet, nshades = 72, format = "hex",
+colormap(colormap = colormaps$viridis, nshades = 72, format = "hex",
   alpha = 1, reverse = FALSE)
 }
 \arguments{
@@ -37,7 +37,7 @@ A package to generate colors from a list of 44 pre-defined palettes
 Generate colors from a list of 44 palettes
 }
 \examples{
-colormap() # Defaults to 72 colors from the 'jet' palette.
+colormap() # Defaults to 72 colors from the 'viridis' palette.
 colormap(colormap=colormaps$temperature, nshades=20) # Diff Palette
 colormap(colormap=c('#000000','#FF0000'), nshades=20) # Colormap as vector of colors
 # list of list. Maximum flexibility

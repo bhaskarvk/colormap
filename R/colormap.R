@@ -89,7 +89,7 @@ colormaps <- list(
 #'
 #' @return Colors either in vector, matrix, list format depending on format.
 #' @examples
-#' colormap() # Defaults to 72 colors from the 'jet' palette.
+#' colormap() # Defaults to 72 colors from the 'viridis' palette.
 #' colormap(colormap=colormaps$temperature, nshades=20) # Diff Palette
 #' colormap(colormap=c('#000000','#FF0000'), nshades=20) # Colormap as vector of colors
 #' # list of list. Maximum flexibility
@@ -97,7 +97,7 @@ colormaps <- list(
 #' colormap(format='rgb',nshades=10) # As rgb
 #' colormap(format='rgb',nshades=10,alpha=0.5) # Constant alpha
 #' colormap(format='rgbaString',nshades=10) # As rgba string
-colormap <- function(colormap=colormaps$jet, nshades=72,
+colormap <- function(colormap=colormaps$viridis, nshades=72,
                      format='hex', alpha=1, reverse=FALSE) {
 
   # validate inputs
@@ -107,10 +107,10 @@ colormap <- function(colormap=colormaps$jet, nshades=72,
            colormap))
     } else if(length(colormap)>1 && !(all(grepl('^#[0-9a-f]{6}$',colormap,
                                                 ignore.case = T)))) {
-    stop("colormap parameter should be a single string from the colormap::colormaps list or a vector of strings in HEX color format\n e.g. colormap='jet' or colormap=c('#FCFDA1','#FF0033')")
+    stop("colormap parameter should be a single string from the colormap::colormaps list or a vector of strings in HEX color format\n e.g. colormap='viridis' or colormap=c('#FCFDA1','#FF0033')")
     }
   } else if(!inherits(colormap,'list')) {
-    stop("colormap parameter should be a single string from the colormap::colormaps list or a vector of strings in HEX color format\n e.g. colormap='jet' or colormap=c('#FCFDA1','#FF0033') or a list of lists e.g. colormap=list(list(index=0,rgb=c(0,0,0)),list(index=1,rgb=c(255,255,255)))")
+    stop("colormap parameter should be a single string from the colormap::colormaps list or a vector of strings in HEX color format\n e.g. colormap='viridis' or colormap=c('#FCFDA1','#FF0033') or a list of lists e.g. colormap=list(list(index=0,rgb=c(0,0,0)),list(index=1,rgb=c(255,255,255)))")
   }
 
   if(!(is.numeric(alpha) && alpha >=0 && alpha <= 1)) {
