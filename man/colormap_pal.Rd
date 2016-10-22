@@ -4,7 +4,7 @@
 \alias{colormap_pal}
 \title{Create a Palette generating function}
 \usage{
-colormap_pal(alpha = 1, colormap = colormaps$jet, reverse = FALSE)
+colormap_pal(alpha = 1, colormap = colormaps$viridis, reverse = FALSE)
 }
 \arguments{
 \item{alpha}{pass through parameter to \code{colormap}}

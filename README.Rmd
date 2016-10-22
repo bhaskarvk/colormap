@@ -59,7 +59,7 @@ The main function is `colormap` which takes 5 optional arguments
 ```{r eg1}
 library(colormap)
 
-# Defaults to 72 colors from the 'jet' palette.
+# Defaults to 72 colors from the 'viridis' palette.
 scales::show_col(colormap(), labels = F)
 
 # Specify a different palette from a list of pre-defined palette.

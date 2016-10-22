@@ -52,7 +52,7 @@ Example
 ``` r
 library(colormap)
 
-# Defaults to 72 colors from the 'jet' palette.
+# Defaults to 72 colors from the 'viridis' palette.
 scales::show_col(colormap(), labels = F)
 ```
 
@@ -97,17 +97,17 @@ You can also get the colors in a 'rgb' matrix and a rgba string vector format
 ``` r
 colormap(format='rgb',nshades=5) # As rgb
 #>      [,1] [,2] [,3] [,4]
-#> [1,]    0    0  131    1
-#> [2,]    2  156  212    1
-#> [3,]  128  255  130    1
-#> [4,]  253  130    0    1
-#> [5,]  128    0    0    1
+#> [1,]   68    1   84    1
+#> [2,]   59   81  139    1
+#> [3,]   33  144  141    1
+#> [4,]   92  200   99    1
+#> [5,]  253  231   37    1
 
 colormap(format='rgbaString',nshades=10) # As rgba string
-#>  [1] "rgba(0,0,131,1)"    "rgba(0,54,166,1)"   "rgba(2,134,202,1)" 
-#>  [4] "rgba(4,224,242,1)"  "rgba(72,255,186,1)" "rgba(188,255,69,1)"
-#>  [7] "rgba(254,215,0,1)"  "rgba(252,97,0,1)"   "rgba(238,0,0,1)"   
-#> [10] "rgba(128,0,0,1)"
+#>  [1] "rgba(68,1,84,1)"    "rgba(71,39,117,1)"  "rgba(62,72,135,1)" 
+#>  [4] "rgba(49,102,141,1)" "rgba(38,130,141,1)" "rgba(36,157,136,1)"
+#>  [7] "rgba(55,181,120,1)" "rgba(109,204,88,1)" "rgba(176,221,49,1)"
+#> [10] "rgba(253,231,37,1)"
 ```
 
 You also get `scale_fill_colormap` and `scale_color_colormap` functions for using these palettes in ggplot2 plots. Check `?colormap::scale_fill_colormap` for details.

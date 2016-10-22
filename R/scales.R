@@ -14,7 +14,7 @@
 #' @return A function that can generate colors from a specified colormap.
 #'
 #' @export
-colormap_pal <- function(alpha = 1, colormap = colormaps$jet, reverse=FALSE) {
+colormap_pal <- function(alpha = 1, colormap = colormaps$viridis, reverse=FALSE) {
   function(n) {
     colormap(colormap=colormap, alpha = alpha,
              format='hex', reverse=reverse,
@@ -28,7 +28,7 @@ colormap_pal <- function(alpha = 1, colormap = colormaps$jet, reverse=FALSE) {
 #' @aliases scale_colour_colormap
 #'
 #' @export
-scale_color_colormap <- function(..., alpha = 1, colormap = colormaps$jet,
+scale_color_colormap <- function(..., alpha = 1, colormap = colormaps$viridis,
                                 discrete = FALSE, reverse = FALSE) {
 
   if (discrete) {
@@ -67,7 +67,7 @@ scale_color_colormap <- function(..., alpha = 1, colormap = colormaps$jet,
 #' @rdname scale_colormap
 #'
 #' @export
-scale_fill_colormap <- function(..., alpha = 1, colormap = colormaps$jet,
+scale_fill_colormap <- function(..., alpha = 1, colormap = colormaps$viridis,
                                 discrete = FALSE, reverse = FALSE) {
 
   if (discrete) {
