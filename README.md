@@ -145,16 +145,34 @@ ggplot(mtcars,aes(x=wt,y=mpg)) + geom_point(aes(color=as.factor(cyl))) +
 Here are two choroplethes using `scale_fill_colormap`.
 
 ``` r
-ensureCranPkg('maptools')
-ensureCranPkg('scales')
-ensureCranPkg('ggplot2')
-ensureCranPkg('ggalt')
-ensureCranPkg('ggthemes')
-ensureCranPkg('devtools')
 
-if(!suppressWarnings(requireNamespace('albersusa', quietly = TRUE))) {
-  devtools::install_github('hrbrmstr/albersusa')
+ensureCranPkg('devtools')
+ensureCranPkg('maptools')
+
+ensureGithubPkg <- function(pkg) {
+  devtools::install_github(pkg)
 }
+
+ensureGithubPkg('hadley/scales')
+#> Using GitHub PAT from envvar GITHUB_PAT
+#> Skipping install of 'scales' from a github remote, the SHA1 (d58d83a9) has not changed since last install.
+#>   Use `force = TRUE` to force installation
+ensureGithubPkg('hadley/ggplot2')
+#> Using GitHub PAT from envvar GITHUB_PAT
+#> Skipping install of 'ggplot2' from a github remote, the SHA1 (17091968) has not changed since last install.
+#>   Use `force = TRUE` to force installation
+ensureGithubPkg('hrbrmstr/ggalt')
+#> Using GitHub PAT from envvar GITHUB_PAT
+#> Skipping install of 'ggalt' from a github remote, the SHA1 (93a7dd9e) has not changed since last install.
+#>   Use `force = TRUE` to force installation
+ensureGithubPkg('hrbrmstr/albersusa')
+#> Using GitHub PAT from envvar GITHUB_PAT
+#> Skipping install of 'albersusa' from a github remote, the SHA1 (cfbad8fa) has not changed since last install.
+#>   Use `force = TRUE` to force installation
+ensureGithubPkg('jrnold/ggthemes')
+#> Using GitHub PAT from envvar GITHUB_PAT
+#> Skipping install of 'ggthemes' from a github remote, the SHA1 (c85a15e1) has not changed since last install.
+#>   Use `force = TRUE` to force installation
 
 library(maptools)
 #> Loading required package: sp
@@ -173,7 +191,7 @@ gg_usa <- ggplot(us@data, aes(map_id=fips_state,fill=pop_2014)) +
   geom_map(map=us_map, color='#ffffff', size=0.1) + 
   expand_limits(x=us_map$long,y=us_map$lat) +
   theme_map() +  
-  coord_proj(us_laea_proj) +
+  #coord_proj(us_laea_proj) +
   theme(legend.position="right") 
 
 gg_usa +
@@ -195,7 +213,7 @@ gg_counties <- ggplot(counties@data,
   geom_map(map=counties_map, color='#ffffff', size=0.1) + 
   expand_limits(x=counties_map$long,y=counties_map$lat) +
   theme_map() +  
-  coord_proj(us_laea_proj) +
+  #coord_proj(us_laea_proj) +
   theme(legend.position="right") 
 
 gg_counties +
