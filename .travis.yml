@@ -2,12 +2,14 @@
 
 language: R
 cache: packages
-sudo: false
+sudo: required
+dist: trusty
 addons:
   apt:
     packages:
       - libproj-dev
       - libv8-dev
+      - libgdal-dev
 r_binary_packages:
   - devtools
   - stringr
@@ -18,4 +20,4 @@ r_binary_packages:
   - ggthemes
   - maptools
 r_github_packages:
-  - hrbrmstr/ggalt
+  - hrbrmstr/albersusa
