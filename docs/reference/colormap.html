@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>colormap. colormap</title>
+<title>A package to generate colors from a list of 44 pre-defined palettes — colormap • colormap</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -88,6 +88,7 @@
     <pre><span class='fu'>colormap</span>(<span class='kw'>colormap</span> <span class='kw'>=</span> <span class='no'>colormaps</span>$<span class='no'>viridis</span>, <span class='kw'>nshades</span> <span class='kw'>=</span> <span class='fl'>72</span>, <span class='kw'>format</span> <span class='kw'>=</span> <span class='st'>"hex"</span>,
   <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>reverse</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
+    <div class="section">
     <h2>Arguments</h2>
     <dl class="dl-horizontal">
       <dt>colormap</dt>
@@ -109,13 +110,15 @@ Should be &#39;hex&#39;, &#39;rgb&#39;, or &#39;rgbaString&#39;</dd>
       <dt>reverse</dt>
       <dd>Boolean. Whether to reverse the order.</dd>
     </dl>
+    </div>
     
-    <div class="Value">
+    <div class="section">
       <h2>Value</h2>
 
       <p>Colors either in vector, matrix, list format depending on format.</p>
     </div>
     
+    <div class="section">
     <h2 id="examples">Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'>colormap</span>() <span class='co'># Defaults to 72 colors from the 'viridis' palette.</span></div><div class='output co'>#&gt;  [1] &quot;#440154ff&quot; &quot;#440558ff&quot; &quot;#450a5cff&quot; &quot;#450e60ff&quot; &quot;#451465ff&quot; &quot;#461969ff&quot;
 #&gt;  [7] &quot;#461d6dff&quot; &quot;#462372ff&quot; &quot;#472775ff&quot; &quot;#472c7aff&quot; &quot;#46307cff&quot; &quot;#45337dff&quot;
@@ -167,6 +170,7 @@ Should be &#39;hex&#39;, &#39;rgb&#39;, or &#39;rgbaString&#39;</dd>
 #&gt;  [7] &quot;rgba(55,181,120,1)&quot; &quot;rgba(109,204,88,1)&quot; &quot;rgba(176,221,49,1)&quot;
 #&gt; [10] &quot;rgba(253,231,37,1)&quot;
 #&gt; </div></pre>
+    </div>
   </div>
   <div class="col-md-3">
     <h2>Author</h2>

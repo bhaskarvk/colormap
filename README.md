@@ -1,31 +1,42 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 Color Palettes from Node.js Colormap module.
-============================================
+--------------------------------------------
 
 This is an R package that allows you to generate colors from color palettes defined in Node.js's [colormap](https://github.com/bpostlethwaite/colormap) module. In total it provides 44 distinct palettes made from sequential and/or diverging colors. In addition to the pre defined palettes you can also specify your own set of colors.
 
 There are also scale functions that can be used with ggplot2.
 
-Credits
--------
+### Information
+
+#### Project Status
+
+[![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active) [![Last-changedate](https://img.shields.io/badge/last%20change-2016--11--15-yellowgreen.svg)](/commits/master)
+
+#### Build Status
+
+[![Travis-CI Build Status](https://travis-ci.org/bhaskarvk/colormap.svg?branch=master)](https://travis-ci.org/bhaskarvk/colormap) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/bhaskarvk/colormap?branch=master&svg=true)](https://ci.appveyor.com/project/bhaskarvk/colormap)
+
+#### CRAN Status
+
+[![minimal R version](https://img.shields.io/badge/R%3E%3D-3.1.0-6666ff.svg)](https://cran.r-project.org/) [![](http://cranlogs.r-pkg.org/badges/grand-total/colormap)](http://cran.rstudio.com/web/packages/colormap/index.html) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/colormap)](https://cran.r-project.org/package=colormap) [![packageversion](https://img.shields.io/badge/Package%20version-0.1.4-orange.svg?style=flat-square)](commits/master)
+
+#### Changelog
+
+-   2016-11-15 0.1.4 With Viridis as default theme.
+-   2016-10-21 0.1.3 Now on CRAN.
+-   2016-09-06 Ability to generate a custom palette.
+-   2016-08-30 Input Validation and ggplot2 scales.
+-   2016-08-29 First Release.
+
+### Credits
 
 -   The [colormap](https://github.com/bpostlethwaite/colormap) Node.js module which does all the heavylifting.
 -   The [V8](https://github.com/jeroenooms/V8) package which allows R code to call Javascript code.
 -   [Bob Rudis](https://twitter.com/hrbrmstr)'s [zoneparser](https://github.com/hrbrmstr/zoneparser) package which I used as a skeleton for this pacakge.
 -   [Simon Garnier](https://twitter.com/sjmgarnier)'s [viridis](https://github.com/sjmgarnier/viridis) package for ggplot2 scale functions.
 
-Updates
--------
-
-[![Travis-CI Build Status](https://travis-ci.org/bhaskarvk/colormap.svg?branch=master)](https://travis-ci.org/bhaskarvk/colormap) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/bhaskarvk/colormap?branch=master&svg=true)](https://ci.appveyor.com/project/bhaskarvk/colormap)
-
--   2016-09-06 Ability to generate a custom palette.
--   2016-08-30 Input Validation and ggplot2 scales.
--   2016-08-29 First Release.
-
-Installation
-------------
+### Installation
 
 Requires [V8](https://cran.r-project.org/web/packages/V8/index.html)
 
@@ -35,8 +46,7 @@ if(!require("devtools")) install.packages("devtools")
 devtools::install_github("bhaskarvk/colormap")
 ```
 
-Usage
------
+### Usage
 
 The main function is `colormap` which takes 5 optional arguments
 
@@ -46,8 +56,7 @@ The main function is `colormap` which takes 5 optional arguments
 -   alpha: Between 0 & 1 to specify the transparency.
 -   reverse: Boolean. Whether to reverse the order of the colors returned or not.
 
-Example
--------
+### Example
 
 ``` r
 library(colormap)
@@ -148,7 +157,6 @@ Here are two choroplethes using `scale_fill_colormap`.
 ensureCranPkg('maptools')
 ensureCranPkg('scales')
 ensureCranPkg('ggplot2')
-ensureCranPkg('ggalt')
 ensureCranPkg('ggthemes')
 ensureCranPkg('devtools')
 
@@ -157,11 +165,8 @@ if(!suppressWarnings(requireNamespace('albersusa', quietly = TRUE))) {
 }
 
 library(maptools)
-#> Loading required package: sp
-#> Checking rgeos availability: TRUE
 library(scales)
 library(ggplot2)
-library(ggalt)
 library(albersusa)
 library(ggthemes)
 library(colormap)
@@ -173,10 +178,12 @@ gg_usa <- ggplot(us@data, aes(map_id=fips_state,fill=pop_2014)) +
   geom_map(map=us_map, color='#ffffff', size=0.1) + 
   expand_limits(x=us_map$long,y=us_map$lat) +
   theme_map() +  
-  coord_proj(us_laea_proj) +
   theme(legend.position="right") 
+#> Warning: `panel.margin` is deprecated. Please use `panel.spacing` property
+#> instead
 
 gg_usa +
+  coord_map("albers", lat0=30, lat1=40) +
   scale_fill_colormap("State Population\n(2014 Estimates)", labels=comma,
                       colormap = colormaps$copper, reverse = T, discrete = F)
 ```
@@ -195,10 +202,12 @@ gg_counties <- ggplot(counties@data,
   geom_map(map=counties_map, color='#ffffff', size=0.1) + 
   expand_limits(x=counties_map$long,y=counties_map$lat) +
   theme_map() +  
-  coord_proj(us_laea_proj) +
   theme(legend.position="right") 
+#> Warning: `panel.margin` is deprecated. Please use `panel.spacing` property
+#> instead
 
 gg_counties +
+  coord_map("albers", lat0=30, lat1=40) +
   scale_fill_colormap("County Population Density", labels=comma, trans = 'log10',
                       colormap = colormaps$picnic, reverse = F, discrete = F) +
   theme(#panel.border = element_rect(colour = "black", fill=NA, size=1),

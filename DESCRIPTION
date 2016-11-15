@@ -12,7 +12,7 @@ Depends: R (>= 3.1.0)
 Imports:
     V8,
     stringr,
-    ggplot2 (< 2.2.0)
+    ggplot2
 RoxygenNote: 5.0.1
 URL: https://github.com/bhaskarvk/colormap
 BugReports: https://github.com/bhaskarvk/colormap/issues
