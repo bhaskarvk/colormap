@@ -4,6 +4,7 @@
 \name{colormap}
 \alias{colormap}
 \alias{colormap-package}
+\alias{colormap}
 \title{A package to generate colors from a list of 44 pre-defined palettes}
 \usage{
 colormap(colormap = colormaps$viridis, nshades = 72, format = "hex",
@@ -49,4 +50,3 @@ colormap(format='rgbaString',nshades=10) # As rgba string
 \author{
 Bhaskar V. Karambelkar
 }
-

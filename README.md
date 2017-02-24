@@ -3,23 +3,19 @@
 Color Palettes from Node.js Colormap module.
 --------------------------------------------
 
-This is an R package that allows you to generate colors from color palettes defined in Node.js's [colormap](https://github.com/bpostlethwaite/colormap) module. In total it provides 44 distinct palettes made from sequential and/or diverging colors. In addition to the pre defined palettes you can also specify your own set of colors.
-
-There are also scale functions that can be used with ggplot2.
-
-### Information
-
-#### Project Status
-
-[![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active) [![Last-changedate](https://img.shields.io/badge/last%20change-2016--11--15-yellowgreen.svg)](/commits/master)
-
-#### Build Status
+[![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active) [![Last-changedate](https://img.shields.io/badge/last%20change-2017--02--24-yellowgreen.svg)](/commits/master)
 
 [![Travis-CI Build Status](https://travis-ci.org/bhaskarvk/colormap.svg?branch=master)](https://travis-ci.org/bhaskarvk/colormap) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/bhaskarvk/colormap?branch=master&svg=true)](https://ci.appveyor.com/project/bhaskarvk/colormap)
 
-#### CRAN Status
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 [![minimal R version](https://img.shields.io/badge/R%3E%3D-3.1.0-6666ff.svg)](https://cran.r-project.org/) [![](http://cranlogs.r-pkg.org/badges/grand-total/colormap)](http://cran.rstudio.com/web/packages/colormap/index.html) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/colormap)](https://cran.r-project.org/package=colormap) [![packageversion](https://img.shields.io/badge/Package%20version-0.1.4-orange.svg?style=flat-square)](commits/master)
+
+------------------------------------------------------------------------
+
+This is an R package that allows you to generate colors from color palettes defined in Node.js's [colormap](https://github.com/bpostlethwaite/colormap) module. In total it provides 44 distinct palettes made from sequential and/or diverging colors. In addition to the pre defined palettes you can also specify your own set of colors.
+
+There are also scale functions that can be used with ggplot2.
 
 #### Changelog
 
@@ -38,10 +34,16 @@ There are also scale functions that can be used with ggplot2.
 
 ### Installation
 
-Requires [V8](https://cran.r-project.org/web/packages/V8/index.html)
+Requires [V8](https://cran.r-project.org/web/packages/V8/index.html) & [ggplot2](https://cran.r-project.org/web/packages/ggplot2/index.html)
 
 ``` r
 if(!require("V8")) install.packages("V8")
+if(!require("V8")) install.packages("ggplot2")
+
+# CRAN Version
+install.packages('colormap')
+
+# OR if you want to install dev. version from Github
 if(!require("devtools")) install.packages("devtools")
 devtools::install_github("bhaskarvk/colormap")
 ```
@@ -56,7 +58,7 @@ The main function is `colormap` which takes 5 optional arguments
 -   alpha: Between 0 & 1 to specify the transparency.
 -   reverse: Boolean. Whether to reverse the order of the colors returned or not.
 
-### Example
+### Examples
 
 ``` r
 library(colormap)
@@ -65,7 +67,7 @@ library(colormap)
 scales::show_col(colormap(), labels = F)
 ```
 
-![](README-eg1-1.png)
+<img src="README_figs/README-eg1-1.png" width="672" />
 
 ``` r
 
@@ -73,7 +75,7 @@ scales::show_col(colormap(), labels = F)
 scales::show_col(colormap(colormap=colormaps$temperature, nshades=20))
 ```
 
-![](README-eg1-2.png)
+<img src="README_figs/README-eg1-2.png" width="672" />
 
 ``` r
 
@@ -81,7 +83,7 @@ scales::show_col(colormap(colormap=colormaps$temperature, nshades=20))
 scales::show_col(colormap(colormap=colormaps$temperature, nshades=20, alpha=0.7))
 ```
 
-![](README-eg1-3.png)
+<img src="README_figs/README-eg1-3.png" width="672" />
 
 ``` r
 
@@ -89,7 +91,7 @@ scales::show_col(colormap(colormap=colormaps$temperature, nshades=20, alpha=0.7)
 scales::show_col(colormap(colormap=c('#FFFFFF','#FF0000'),nshades = 12))
 ```
 
-![](README-eg1-4.png)
+<img src="README_figs/README-eg1-4.png" width="672" />
 
 ``` r
 
@@ -99,7 +101,7 @@ scales::show_col(colormap(colormap=list(list(index=0,rgb=c(0,255,0)),
                           nshades=12, alpha=0.65))
 ```
 
-![](README-eg1-5.png)
+<img src="README_figs/README-eg1-5.png" width="672" />
 
 You can also get the colors in a 'rgb' matrix and a rgba string vector format
 
@@ -139,7 +141,7 @@ ggplot(mtcars,aes(x=wt,y=mpg)) + geom_point(aes(color=hp)) +
                        discrete = F,colormap = colormaps$viridis, reverse = T)
 ```
 
-![](README-ggplot2-1.png)
+<img src="README_figs/README-ggplot2-1.png" width="576" />
 
 ``` r
 
@@ -149,7 +151,7 @@ ggplot(mtcars,aes(x=wt,y=mpg)) + geom_point(aes(color=as.factor(cyl))) +
                        discrete = T,colormap = colormaps$warm, reverse = T)
 ```
 
-![](README-ggplot2-2.png)
+<img src="README_figs/README-ggplot2-2.png" width="576" />
 
 Here are two choroplethes using `scale_fill_colormap`.
 
@@ -179,8 +181,6 @@ gg_usa <- ggplot(us@data, aes(map_id=fips_state,fill=pop_2014)) +
   expand_limits(x=us_map$long,y=us_map$lat) +
   theme_map() +  
   theme(legend.position="right") 
-#> Warning: `panel.margin` is deprecated. Please use `panel.spacing` property
-#> instead
 
 gg_usa +
   coord_map("albers", lat0=30, lat1=40) +
@@ -188,7 +188,7 @@ gg_usa +
                       colormap = colormaps$copper, reverse = T, discrete = F)
 ```
 
-![](README-maps-1.png)
+<img src="README_figs/README-maps-1.png" width="672" />
 
 ``` r
 
@@ -198,23 +198,21 @@ counties <- counties_composite()
 counties_map <- fortify(counties, region="fips")
 
 gg_counties <- ggplot(counties@data, 
-                      aes(map_id=fips,fill=population/census_area)) +
+                      aes(map_id=fips,fill=census_area)) +
   geom_map(map=counties_map, color='#ffffff', size=0.1) + 
   expand_limits(x=counties_map$long,y=counties_map$lat) +
   theme_map() +  
   theme(legend.position="right") 
-#> Warning: `panel.margin` is deprecated. Please use `panel.spacing` property
-#> instead
 
 gg_counties +
   coord_map("albers", lat0=30, lat1=40) +
-  scale_fill_colormap("County Population Density", labels=comma, trans = 'log10',
-                      colormap = colormaps$picnic, reverse = F, discrete = F) +
+  scale_fill_colormap("County Area", labels=comma, trans = 'log10',
+                      colormap = colormaps$freesurface_red, reverse = T, discrete = F) +
   theme(#panel.border = element_rect(colour = "black", fill=NA, size=1),
         legend.position = 'bottom', legend.direction = "horizontal")
 ```
 
-![](README-maps-2.png)
+<img src="README_figs/README-maps-2.png" width="672" />
 
 Here is a plot showing all 44 pre-defined color palettes and the colors they generate.
 
@@ -228,4 +226,4 @@ purrr::walk(colormaps, function(x) {
   })
 ```
 
-![](README-plot-1.png)
+<img src="README_figs/README-plot-1.png" width="672" />

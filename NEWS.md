@@ -14,7 +14,7 @@
 
 ## Changes
 
-## Added ability to generate custom palette.
+* Added ability to generate custom palette.
 
 # colormap 0.1.1
 

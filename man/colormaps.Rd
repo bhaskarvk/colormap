@@ -12,4 +12,3 @@ colormaps
 List of pre-defined colormaps
 }
 \keyword{datasets}
-

@@ -34,4 +34,3 @@ number of colors.
 
 See \link[colormap]{colormap} for more information on the color scale.
 }
-
