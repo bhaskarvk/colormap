@@ -1,25 +1,19 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+[![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active) [![Last-changedate](https://img.shields.io/badge/last%20change-2017--02--27-green.svg)](/commits/master) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![keybase verified](https://img.shields.io/badge/keybase-verified-brightgreen.svg)](https://gist.github.com/bhaskarvk/46fbf2ba7b5713151d7e)
+
+[![Travis-CI Build Status](https://travis-ci.org/bhaskarvk/colormap.svg?branch=master)](https://travis-ci.org/bhaskarvk/colormap) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/bhaskarvk/colormap?branch=master&svg=true)](https://ci.appveyor.com/project/bhaskarvk/colormap)
+
+[![minimal R version](https://img.shields.io/badge/R%3E%3D-3.1.0-6666ff.svg)](https://cran.r-project.org/) [![packageversion](https://img.shields.io/badge/Package%20version-0.1.4-orange.svg?style=flat-square)](commits/master) [![](http://cranlogs.r-pkg.org/badges/grand-total/colormap)](http://cran.rstudio.com/web/packages/colormap/index.html) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/colormap)](https://cran.r-project.org/package=colormap)
+
+------------------------------------------------------------------------
+
 Color Palettes from Node.js Colormap module.
 --------------------------------------------
 
 This is an R package that allows you to generate colors from color palettes defined in Node.js's [colormap](https://github.com/bpostlethwaite/colormap) module. In total it provides 44 distinct palettes made from sequential and/or diverging colors. In addition to the pre defined palettes you can also specify your own set of colors.
 
 There are also scale functions that can be used with ggplot2.
-
-### Information
-
-#### Project Status
-
-[![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active) [![Last-changedate](https://img.shields.io/badge/last%20change-2016--11--15-yellowgreen.svg)](/commits/master)
-
-#### Build Status
-
-[![Travis-CI Build Status](https://travis-ci.org/bhaskarvk/colormap.svg?branch=master)](https://travis-ci.org/bhaskarvk/colormap) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/bhaskarvk/colormap?branch=master&svg=true)](https://ci.appveyor.com/project/bhaskarvk/colormap)
-
-#### CRAN Status
-
-[![minimal R version](https://img.shields.io/badge/R%3E%3D-3.1.0-6666ff.svg)](https://cran.r-project.org/) [![](http://cranlogs.r-pkg.org/badges/grand-total/colormap)](http://cran.rstudio.com/web/packages/colormap/index.html) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/colormap)](https://cran.r-project.org/package=colormap) [![packageversion](https://img.shields.io/badge/Package%20version-0.1.4-orange.svg?style=flat-square)](commits/master)
 
 #### Changelog
 
@@ -179,8 +173,6 @@ gg_usa <- ggplot(us@data, aes(map_id=fips_state,fill=pop_2014)) +
   expand_limits(x=us_map$long,y=us_map$lat) +
   theme_map() +  
   theme(legend.position="right") 
-#> Warning: `panel.margin` is deprecated. Please use `panel.spacing` property
-#> instead
 
 gg_usa +
   coord_map("albers", lat0=30, lat1=40) +
@@ -198,18 +190,16 @@ counties <- counties_composite()
 counties_map <- fortify(counties, region="fips")
 
 gg_counties <- ggplot(counties@data, 
-                      aes(map_id=fips,fill=population/census_area)) +
+                      aes(map_id=fips,fill=census_area)) +
   geom_map(map=counties_map, color='#ffffff', size=0.1) + 
   expand_limits(x=counties_map$long,y=counties_map$lat) +
   theme_map() +  
   theme(legend.position="right") 
-#> Warning: `panel.margin` is deprecated. Please use `panel.spacing` property
-#> instead
 
 gg_counties +
   coord_map("albers", lat0=30, lat1=40) +
-  scale_fill_colormap("County Population Density", labels=comma, trans = 'log10',
-                      colormap = colormaps$picnic, reverse = F, discrete = F) +
+  scale_fill_colormap("County Area", labels=comma, trans = 'log10',
+                      colormap = colormaps$freesurface_red, reverse = T, discrete = F) +
   theme(#panel.border = element_rect(colour = "black", fill=NA, size=1),
         legend.position = 'bottom', legend.direction = "horizontal")
 ```
