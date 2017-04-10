@@ -1,0 +1,24 @@
+title: Color Palettes from Node.js Colormap module.
+authors:
+  Bhaskar Karambelkar:
+    href: https://www.karambelkar.info/
+
+template:
+  package: pkgdown.bvk
+  params:
+    bootswatch: yeti
+
+reference:
+  - title: Package Description
+    desc: ~
+    contents:
+      - '`colormap`'
+  - title: Main Functions
+    desc: ~
+    contents:
+      - '`colormap_pal`'
+      - '`colormaps`'
+  - title: '`ggplot2` scales'
+    desc: ~
+    contents:
+      - '`scale_color_colormap`'
