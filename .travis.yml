@@ -4,20 +4,3 @@ language: R
 cache: packages
 sudo: required
 dist: trusty
-addons:
-  apt:
-    packages:
-      - libproj-dev
-      - libv8-dev
-      - libgdal-dev
-r_binary_packages:
-  - devtools
-  - stringr
-  - V8
-  - scales
-  - ggplot2
-  - testthat
-  - ggthemes
-  - maptools
-r_github_packages:
-  - hrbrmstr/albersusa
