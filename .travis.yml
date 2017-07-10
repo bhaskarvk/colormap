@@ -4,3 +4,13 @@ language: R
 cache: packages
 sudo: required
 dist: trusty
+addons:
+  apt:
+    packages:
+      - libv8-3.14-dev
+r_binary_packages:
+  - V8
+  - stringr
+  - ggplot2
+  - scales
+  - testthat
